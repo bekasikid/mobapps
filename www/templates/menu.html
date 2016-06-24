@@ -1,0 +1,78 @@
+﻿
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-assertive">
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <div ng-class="isLoggedInClass()">
+            <ion-header-bar class="expanded">
+                <div style="text-align: center;margin: 0px auto">
+                    <img src="img/sansa-2.jpg" class="avatar motion spin fade" style="left:35%">
+                </div>
+                <br>
+                <div class="menu-bottom" style="color:white;">
+                    <span>{{ fullname }}</span> <br>
+                    <span style="font-weight: normal;font-size: 12px;color:white">
+                        <i class="fa fa-credit-card"></i>
+                        <!-- Saldo : Rp. 13.000,- | 1200 Poin -->
+                        Saldo : Rp. {{ balance }},- | 1200 Poin
+                    </span>    
+                </div>
+            </ion-header-bar>
+        </div>
+        <div ng-class="isLoggedInClassLogin()">
+            <ion-header-bar class="expanded">
+                
+            </ion-header-bar>
+        </div>
+        <ion-content class="stable-bg has-expanded-header">
+            <ion-list ng-class="isLoggedInClassLogin()">
+                <ion-item nav-clear menu-close href="#/app/login">
+                    <i class="fa fa-hospital-o"></i> Login
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/register">
+                    <i class="fa fa-plus-square"></i> Daftar
+                </ion-item>
+                <hr>
+                <ion-item nav-clear menu-close href="#/app/information">
+                    <i class="fa fa-home"></i> Home
+                </ion-item>
+            </ion-list>
+            <div ng-class="isLoggedInClass()">
+                <ion-list>
+                    <ion-item nav-clear menu-close href="#/app/pembayaran">
+                        <i class="fa fa-credit-card-alt"></i> Pembayaran
+                    </ion-item>
+                    <ion-item nav-clear menu-close href="#/app/pembelian">
+                        <i class="fa fa-credit-card"></i> Pembelian
+                    </ion-item>
+                </ion-list>
+                <hr>
+                <ion-list>  
+                    <ion-item nav-clear menu-close href="#/app/tukar">
+                        <i class="fa fa-gift"></i> Tukar Poin
+                    </ion-item>
+                </ion-list>
+                <ion-item nav-clear menu-close href="#/app/information">
+                    <i class="fa fa-info"></i> Infomasi
+                </ion-item>
+                <hr>
+                <ion-list>
+                    <ion-item nav-clear menu-close href="#/app/profile">
+                        <i class="fa fa-user"></i> Akun
+                    </ion-item>
+                    <ion-item nav-clear menu-close ng-click="logout()">
+                        <i class="fa fa-sign-out"></i> Keluar
+                    </ion-item>
+                </ion-list>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,46 @@
+<ion-view view-title="Pembelian Pulsa">
+<ion-content>
+<div class="im-wrapper">
+  <div class="list">
+    <br><br>
+    <label class="item item-input item-floating-label">
+      <span class="input-label">Nomor Telepon</span>
+      <input type="text" placeholder="Contoh 081234567890" ng-model="data.notelp">
+    </label>
+    <br>
+    <label class="item item-input item-select">
+        <div class="input-label">
+            Operator
+        </div>
+        <select name="kartu">
+            <option value="0">Tri</option>
+            <option selected="" value="1">Indosat</option>
+            <option value="2">Smartfren</option>
+            <option value="3">Telkomsel</option>
+            <option value="4">XL</option>
+            <option value="5">Esia</option>
+        </select>
+    </label>
+    <br>
+    <label class="item item-input item-select">
+        <div class="input-label">
+            Nominal
+        </div>
+        <select name="nominal">
+            <option value="0" selected>10.000</option>
+            <option value="1">20.000</option>
+            <option value="2">25.000</option>
+            <option value="3">50.000</option>
+            <option value="4">100.000</option>
+        </select>
+    </label>
+    <br><br>
+    <div>Syarat dan ketentuan berlaku </div>
+    <br>
+    <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="beli()">
+      <i class="icon ion-android-cart"></i> Beli
+    </button>
+  </div>
+</div>
+</ion-content>
+</ion-view>

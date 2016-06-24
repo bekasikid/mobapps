@@ -1,0 +1,59 @@
+<ion-view view-title="Login" align-title="left">
+    <ion-content style="
+                        background-attachment: fixed;
+                        margin: 0 auto;
+                        height: auto;
+                        background-size: cover;
+                        background-attachment: fixed;
+                        background-position: center center;
+                        position: absolute;
+                        background-repeat: repeat-x;
+                        background-attachment: fixed;
+                        background-position: top right;
+                        position: absolute;
+                        overflow: hidden;
+                        text-align: center;
+                        margin: 0 auto;
+                        overflow: hidden;">
+        <div class="ionic login" ng-app="login">
+            <div class="hero no-header height-login flat">
+                <div class="content">
+                    <!-- <i class="ion-map icon hero-icon royal-bg"></i> -->
+
+                    <div class="profile-login">
+                        <img src="img/logo.png" class="img-responsive" alt="" width="150">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <h4>Masuk</h4>
+            </div>
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder="Username" ng-model="data.username">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="Password" ng-model="data.password">
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-click="login()">
+                    Masuk
+                </button>
+            </div>
+            <div class="button-bar social-login" style="margin:0px;display: none">
+                <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+                <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
+                <button class="button button-small button-border icon-left ion-social-facebook button-positive-900" ng-click="fbLogin()">Facebook</button>
+            </div>
+
+            <div class="padding">
+                <a href="#/app/register">
+                    <button class="button col-md-12 button-block button-dark waves-effect waves-button waves-light" >Daftar</button>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
