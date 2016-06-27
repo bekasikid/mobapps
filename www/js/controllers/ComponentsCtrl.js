@@ -52,17 +52,6 @@
 
         var timestamp = date_php("YmdHis");
         var pass = CryptoJS.SHA1(('' + res + password + timestamp)).toString();
-
-        /*
-         <option value="0">Tri</option>
-         <option selected="" value="1">Indosat</option>
-         <option value="2">Smartfren</option>
-         <option value="3">Telkomsel</option>
-         <option value="4">XL</option>
-         <option value="5">Esia</option>
-         */
-
-
         var data = {
             "userid": response.username_trx,
             "reffid": "Mobile-" + timestamp + "-" + Math.floor(Math.random() * 700),
@@ -75,7 +64,6 @@
         };
         // console.log(data);
         var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
-
         $http({
             method: 'POST',
             url: link_beli,
