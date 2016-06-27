@@ -7,11 +7,33 @@
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">No BPJS </span>
-                    <input type="text" placeholder="No BPJS">
+                    <input type="text" placeholder="No BPJS" ng-model="bpjs.target">
                 </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Nama </span>
+                    <input type="text" placeholder="Nama" ng-model="bpjs.nama">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Cabang </span>
+                    <input type="text" placeholder="Cabang" ng-model="bpjs.cabang">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Tagihan </span>
+                    <input type="text" placeholder="Tagihan" ng-model="bpjs.tagihan|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Admin </span>
+                    <input type="text" placeholder="Admin" ng-model="bpjs.admin|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Total </span>
+                    <input type="text" placeholder="Total" ng-model="bpjs.total|currency:'Rp. ':0">
+                </label>
+
                 <br>
                 <div>Syarat dan ketentuan berlaku </div>
-                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light"> <i class="fa fa-money"></i> Bayar</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="!inq" ng-click="beli()"> <i class="fa fa-money"></i> Check Data</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="inq" ng-click="bayar()"> <i class="fa fa-money"></i> Bayar</button>
             </div>
         </div>
     </ion-content>

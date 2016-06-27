@@ -91,7 +91,80 @@
             }
         });
     }
-}).controller('ComponentsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup,$cordovaGeolocation) {
+}).
+controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
+
+    $scope.bpjs = {
+        target : "",
+        nama : "",
+        cabang : "",
+        tagihan : 0,
+        admin : 0,
+        total : 0
+    };
+
+    $scope.beli = function () {
+        $scope.inq = false;
+        var response = JSON.parse(window.localStorage.getItem("response"));
+        key = CryptoJS.enc.Utf8.parse(key);
+        var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
+        var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+        var text = plaintext.toString(CryptoJS.enc.Utf8);
+
+        var res = response.username_trx;
+        var password = text;
+
+        var timestamp = date_php("YmdHis");
+        var pass = CryptoJS.SHA1(('' + res + password + timestamp)).toString();
+        var data = {
+            "userid": response.username_trx,
+            "reffid": "Mobile-BPJS-" + timestamp + "-" + Math.floor(Math.random() * 700),
+            "target": $scope.bpjs.target,
+            "amount": 0,
+            "terminal": "terminal-mobapps-1",
+            "timestamp": timestamp,
+            "sign": pass,
+            "prodName": "BPJS"
+        };
+        var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+        $http({
+            method: 'POST',
+            url: link_beli,
+            data: data,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (res) {
+
+            if (res.status == 200) {
+                if (res.data.status != "FAILED") {
+                    // var alertPopup = $ionicPopup.alert({
+                    //     title: 'Beli Pulsa Berhasil',
+                    //     template: 'Selamat anda telah membeli pulsa'
+                    // });
+                    $scope.bpjs.nama = res.data.inquiry.data_inquiry.nama;
+                    $scope.bpjs.cabang = res.data.inquiry.data_inquiry.cabang;
+                    $scope.bpjs.tagihan = res.data.inquiry.data_inquiry.jumlah_bayar;
+                    $scope.bpjs.admin = res.data.inquiry.data_inquiry.admin_transaksi;
+                    $scope.bpjs.total = res.data.inquiry.data_inquiry.total_bayar;
+                    $scope.inq = true;
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Beli Pulsa Gagal',
+                        template: res.data.message
+                    });
+                }
+            } else {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Beli Pulsa Gagal',
+                    template: res.data.status
+                });
+            }
+        });
+    };
+    $scope.bayar = function(){
+
+    };
+})
+    .controller('ComponentsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup,$cordovaGeolocation) {
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     $cordovaGeolocation
         .getCurrentPosition(posOptions)

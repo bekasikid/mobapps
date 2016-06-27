@@ -165,7 +165,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'templates/bpjs.html',
-                controller: 'ExtensionsCtrl'
+                controller: 'BpjsCtrl'
             }
         }
     })
