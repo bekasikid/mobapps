@@ -2,20 +2,41 @@
     <ion-content>
         <div class="im-wrapper">
         	<div class="text-center">
-        		Bayar Tagihan Speedy
+        		Bayar Tagihan Telkom / Speedy
         	</div>
             <div class="list">
                 <br>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">No ID Pelanggan</span>
-                    <input type="text" placeholder="No ID Pelanggan">
+                    <input type="text" placeholder="No ID Pelanggan" ng-model="telkom.target">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Nama </span>
+                    <input type="text" placeholder="Nama" ng-model="telkom.nama">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Periode </span>
+                    <input type="text" placeholder="Periode" ng-model="telkom.periode">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">DIVRE </span>
+                    <input type="text" placeholder="DIVRE" ng-model="telkom.divre">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Tagihan </span>
+                    <input type="text" placeholder="Tagihan" ng-model="telkom.tagihan|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Admin </span>
+                    <input type="text" placeholder="Admin" ng-model="telkom.admin|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-floating-label" ng-if="inq">
+                    <span class="input-label">Total </span>
+                    <input type="text" placeholder="Total" ng-model="telkom.total|currency:'Rp. ':0">
                 </label>
                 <br>
-                <div>Syarat dan ketentuan berlaku </div>
-                <br>
-                <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1">
-                    <i class="fa fa-money"></i> Bayar
-                </button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="!inq" ng-click="beli()"> <i class="fa fa-money"></i> Check Data</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="inq" ng-click="bayar()"> <i class="fa fa-money"></i> Bayar</button>
             </div>
         </div>
     </ion-content>

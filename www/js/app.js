@@ -136,7 +136,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/speedy',
         views: {
             'menuContent': {
-                templateUrl: 'templates/speedy.html'
+                templateUrl: 'templates/speedy.html',
+                controller: 'TelkomSpeedyCtrl'
             }
         }
     })

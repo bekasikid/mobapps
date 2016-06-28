@@ -94,8 +94,8 @@
             }
         });
     }
-}).
-controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
+})
+    .controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
 
     $scope.bpjs = {
         target : "",
@@ -167,6 +167,73 @@ controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, 
 
     };
 })
+    .controller('TelkomSpeedyCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
+        var response = JSON.parse(window.localStorage.getItem("response"));
+        key = CryptoJS.enc.Utf8.parse(key);
+        var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
+        var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+        var password = plaintext.toString(CryptoJS.enc.Utf8);
+        var uname = response.username_trx;
+
+        $scope.telkom = {
+            target : "",
+            nama : "",
+            periode : "",
+            divre : "",
+            tagihan : 0,
+            admin : 0,
+            total : 0
+        };
+
+        $scope.beli = function () {
+            $scope.inq = false;
+            var timestamp = date_php("YmdHis");
+            var pass = CryptoJS.SHA1((uname + password + timestamp)).toString();
+            var data = {
+                "userid": response.username_trx,
+                "reffid": "Mobile-BPJS-" + timestamp + "-" + Math.floor(Math.random() * 700),
+                "target": $scope.telkom.target,
+                "amount": 0,
+                "terminal": "terminal-mobapps-1",
+                "timestamp": timestamp,
+                "sign": pass,
+                "prodName": "TELKOM"
+            };
+            var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+            $http({
+                method: 'POST',
+                url: link_beli,
+                data: data,
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (res) {
+
+                if (res.status == 200) {
+                    if (res.data.status != "FAILED") {
+                        $scope.telkom.nama = res.data.inquiry.data_inquiry.nama;
+                        $scope.telkom.periode = res.data.inquiry.data_inquiry.periode;
+                        $scope.telkom.divre = res.data.inquiry.data_inquiry.divre;
+                        $scope.telkom.tagihan = res.data.inquiry.data_inquiry.jumlah_bayar;
+                        $scope.telkom.admin = res.data.inquiry.data_inquiry.admin_transaksi;
+                        $scope.telkom.total = res.data.inquiry.data_inquiry.total_bayar;
+                        $scope.inq = true;
+                    } else {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Inquiry Gagal',
+                            template: res.data.message
+                        });
+                    }
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Inquiry Gagal',
+                        template: res.data.status
+                    });
+                }
+            });
+        };
+        $scope.bayar = function(){
+
+        };
+    })
     .controller('ComponentsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup,$cordovaGeolocation) {
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     $cordovaGeolocation
