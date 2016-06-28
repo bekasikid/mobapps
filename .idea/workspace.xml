@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c828c5b8-18ef-4dd9-a614-bb25e778252c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mobapps.iml" afterPath="$PROJECT_DIR$/.idea/mobapps.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/pulsa.html" afterPath="$PROJECT_DIR$/www/templates/pulsa.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" afterPath="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" />
     </list>
     <ignored path="mobapps.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,13 +35,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComponentsCtrl.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ComponentsCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
               <folding>
-                <element signature="e#6520#9748#0" expanded="false" />
+                <element signature="e#6483#9711#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -76,10 +77,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pulsa.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pulsa.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="473">
               <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
               <folding />
             </state>
@@ -89,7 +90,7 @@
       <file leaf-file-name="bpjs.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
+            <state relative-caret-position="493">
               <caret line="29" column="97" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
               <folding />
             </state>
@@ -121,9 +122,9 @@
         <option value="$PROJECT_DIR$/www/templates/login.html" />
         <option value="$PROJECT_DIR$/www/templates/register.html" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" />
         <option value="$PROJECT_DIR$/www/templates/bpjs.html" />
         <option value="$PROJECT_DIR$/www/templates/pulsa.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" />
       </list>
     </option>
   </component>
@@ -275,15 +276,16 @@
       <workItem from="1467019842140" duration="1716000" />
       <workItem from="1467037499409" duration="587000" />
       <workItem from="1467077540941" duration="759000" />
+      <workItem from="1467109249788" duration="252000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18181000" />
+    <option name="totallyTimeSpent" value="18433000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24255952" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -329,7 +331,7 @@
         <state relative-caret-position="425">
           <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -387,7 +389,7 @@
         <state relative-caret-position="425">
           <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -445,7 +447,7 @@
         <state relative-caret-position="1105">
           <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -495,7 +497,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,7 +539,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -571,7 +573,7 @@
         <state relative-caret-position="119">
           <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -605,7 +607,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -639,7 +641,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
+            <element signature="e#6483#9711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -708,19 +710,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding>
-            <element signature="e#6520#9748#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
+        <state relative-caret-position="493">
           <caret line="29" column="97" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
           <folding />
         </state>
@@ -728,9 +720,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
+        <state relative-caret-position="473">
           <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding>
+            <element signature="e#6483#9711#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

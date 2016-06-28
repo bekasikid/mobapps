@@ -1,4 +1,17 @@
 ﻿app.controller('PulsaCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup,$cordovaGeolocation) {
+    var response = JSON.parse(window.localStorage.getItem("response"));
+    key = CryptoJS.enc.Utf8.parse(key);
+    var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
+    var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+    // console.log(plaintext.toString());
+    //     var text = CryptoJS.enc.Utf8.stringify(plaintext);
+    var text = plaintext.toString(CryptoJS.enc.Utf8);
+
+    var res = response.username_trx;
+    var password = text;
+    console.log(password);
+
+
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     var tsel = false;
     $scope.prepaid = {
@@ -35,17 +48,7 @@
     };
 
     $scope.beli = function () {
-        var response = JSON.parse(window.localStorage.getItem("response"));
-        key = CryptoJS.enc.Utf8.parse(key);
-        var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-        var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
-        // console.log(plaintext.toString());
-        //     var text = CryptoJS.enc.Utf8.stringify(plaintext);
-        var text = plaintext.toString(CryptoJS.enc.Utf8);
 
-        var res = response.username_trx;
-        var password = text;
-        console.log(password);
         // var shaObj = new jsSHA("SHA-1", "TEXT");
         // shaObj.update(''+response.username_trx+text+dataWaktu);
         // var hash = shaObj.getHash("HEX");
