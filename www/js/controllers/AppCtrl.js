@@ -1,5 +1,5 @@
 ﻿// app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory, ngFB) {
-app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory,$http) {
+app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory,$http,$state) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -9,7 +9,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
             this.classList.toggle('active');
         });
     }
-    
+
     $scope.slideHasChanged = function ($index){
 
     }
@@ -61,66 +61,44 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
     $scope.balance  = window.localStorage.getItem("balance");
 
     $scope.login = function() {
-
-        var username = 'PPT1376541621';
-        var password = '23ntcdjy';
-        var link = "http://103.16.78.45/admin/index.php/api/partner/login";
-        // var data = {"u" : 'alfian.malik@gmail.com', "p": 'apaansih'};
+        var link = uri+"partner/login";
         var data = {"u" : $scope.data.username, "p": $scope.data.password};
-        
+
         $scope.options = $scope.options || {};
-
-        $http({
-            method: 'POST',
-            url: link,
-            data: data,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(res){
+        $http.post(link,data).then(function(res){
             console.log(res);
-            if(res.status="200"){
-                if(null != res.data.email){
-                    window.localStorage.setItem("username", res.data.fullname);
-                    
-                    window.localStorage.setItem("password", res.data.password);
-                    window.localStorage.setItem("response", JSON.stringify(res.data));
+            if(res.status = 200){
+                window.localStorage.setItem("username", res.data.fullname);
+                window.localStorage.setItem("password", res.password);
+                window.localStorage.setItem("response", JSON.stringify(res.data));
 
-                    // window.localStorage.setItem("response", JSON.stringify(response[0]));
-                    // console.log(JSON.parse(window.localStorage.getItem("response")).fullname);
-                    
-                        var d = new Date();
-                        var timestamp = d.getFullYear()+''+d.getMonth()+''+d.getDay()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+                ky = CryptoJS.enc.Utf8.parse(key);
+                var iv = CryptoJS.enc.Base64.parse(res.data.iv); //nilai iv ada di response
+                var plaintext = CryptoJS.AES.decrypt(res.data.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+                var pass = plaintext.toString(CryptoJS.enc.Utf8);
+                var timestamp = date_php("YmdHis");
+                var pass = CryptoJS.SHA1((res.data.username_trx + pass + timestamp)).toString();
 
-                        var pass = CryptoJS.SHA1(res.data.username_trx+password+timestamp).toString();
-                        var link_balance = 'http://103.16.78.45/admin/index.php/api/routers/balance/userid/'+res.data.username_trx+'/sign/'+pass+'/timestamp/'+timestamp;
-                        $http({
-                            method: 'GET',
-                            url: link_balance,
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                        }).then(function(balance){
-                            window.localStorage.setItem("balance", balance.data.balance);
-                            $scope.balance = balance.data.balance;
-                        });
-
-                    window.location = "#/app/profile";
+                var link_balance = uri + 'routers/balance/userid/'+res.data.username_trx+'/sign/'+pass+'/timestamp/'+timestamp;
+                $http.get(link_balance).success(function(row_b){
+                    window.localStorage.setItem("balance", row_b.balance);
+                    $scope.balance = row_b.balance;
+                    $state.go("app.mainmenu");
                     $ionicHistory.nextViewOptions({
                         disableBack: true
-                    });  
+                    });
                     $scope.fullname = window.localStorage.getItem("username");
-                    $scope.balance  = window.localStorage.getItem("balance");
-                }else{
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Login Gagal',
-                        template: res.data.error
-                    });    
-                }
+                    $scope.balance = window.localStorage.getItem("balance");
+                });
             }else{
                 var alertPopup = $ionicPopup.alert({
-                    title: 'Login Gagal',
-                    template: 'Masukan Username dan Password dengan benar'
+                    title: 'Username / pasword salah',
+                    template: res.data.status
                 });
             }
+
         });
-    }
+    };
 
     $scope.isLoggedIn = function() {
         if (window.localStorage.getItem("username") !== undefined && window.localStorage.getItem("password") !== undefined) {

@@ -22,14 +22,14 @@
                     <span style="font-weight: normal;font-size: 12px;color:white">
                         <i class="fa fa-credit-card"></i>
                         <!-- Saldo : Rp. 13.000,- | 1200 Poin -->
-                        Saldo : Rp. {{ balance }},- | 1200 Poin
-                    </span>    
+                        Saldo : {{ balance | currency : "Rp. ": 0}}
+                    </span>
                 </div>
             </ion-header-bar>
         </div>
         <div ng-class="isLoggedInClassLogin()">
             <ion-header-bar class="expanded">
-                
+
             </ion-header-bar>
         </div>
         <ion-content class="stable-bg has-expanded-header">
@@ -55,7 +55,7 @@
                     </ion-item>
                 </ion-list>
                 <hr>
-                <ion-list>  
+                <ion-list>
                     <ion-item nav-clear menu-close href="#/app/tukar">
                         <i class="fa fa-gift"></i> Tukar Poin
                     </ion-item>

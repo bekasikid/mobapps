@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c828c5b8-18ef-4dd9-a614-bb25e778252c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/templates/menu-utama.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/AppCtrl.js" afterPath="$PROJECT_DIR$/www/js/controllers/AppCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" afterPath="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/bpjs.html" afterPath="$PROJECT_DIR$/www/templates/bpjs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/menu.html" afterPath="$PROJECT_DIR$/www/templates/menu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/pulsa.html" afterPath="$PROJECT_DIR$/www/templates/pulsa.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/speedy.html" afterPath="$PROJECT_DIR$/www/templates/speedy.html" />
     </list>
     <ignored path="mobapps.iws" />
@@ -30,18 +34,18 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="139" column="41" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+            <state relative-caret-position="523">
+              <caret line="224" column="50" selection-start-line="224" selection-start-column="50" selection-end-line="224" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListsCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/ListsCtrl.js">
+      <file leaf-file-name="AppCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/AppCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1264">
+              <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -50,23 +54,43 @@
       <file leaf-file-name="ComponentsCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28">
-              <caret line="208" column="0" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
-              <folding>
-                <element signature="e#118#3551#0" expanded="false" />
-                <element signature="e#3651#6361#0" expanded="false" />
-                <element signature="e#9397#12625#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="speedy.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/speedy.html">
+      <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="22" column="81" selection-start-line="22" selection-start-column="81" selection-end-line="22" selection-end-column="81" />
+            <state relative-caret-position="408">
+              <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pembayaran.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/pembayaran.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu-utama.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/menu-utama.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <marker date="1467409205009" expanded="false" signature="794:818" ph="..." />
+                <marker date="1467409205009" expanded="false" signature="1175:1199" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,21 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pulsa.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+            <state relative-caret-position="170">
+              <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -114,8 +128,8 @@
       <file leaf-file-name="bpjs.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="191" selection-start-line="32" selection-start-column="16" selection-end-line="33" selection-end-column="191" />
+            <state relative-caret-position="544">
+              <caret line="32" column="91" selection-start-line="32" selection-start-column="91" selection-end-line="32" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -145,10 +159,13 @@
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/templates/login.html" />
         <option value="$PROJECT_DIR$/www/templates/register.html" />
-        <option value="$PROJECT_DIR$/www/templates/pulsa.html" />
-        <option value="$PROJECT_DIR$/www/templates/bpjs.html" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/templates/speedy.html" />
+        <option value="$PROJECT_DIR$/www/templates/bpjs.html" />
+        <option value="$PROJECT_DIR$/www/templates/menu.html" />
+        <option value="$PROJECT_DIR$/www/templates/menu-utama.html" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/AppCtrl.js" />
+        <option value="$PROJECT_DIR$/www/templates/pulsa.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js" />
       </list>
     </option>
@@ -190,11 +207,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane />
@@ -210,6 +227,11 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.CoffeeScript" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\mobile\mobapps-new\www\templates" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -302,12 +324,19 @@
       <workItem from="1467037499409" duration="587000" />
       <workItem from="1467077540941" duration="759000" />
       <workItem from="1467109249788" duration="806000" />
-      <workItem from="1467121385093" duration="1673000" />
+      <workItem from="1467121385093" duration="2271000" />
+      <workItem from="1467174851384" duration="1280000" />
+      <workItem from="1467260379624" duration="2092000" />
+      <workItem from="1467342670093" duration="2430000" />
+      <workItem from="1467391762095" duration="412000" />
+      <workItem from="1467408462090" duration="1940000" />
+      <workItem from="1467450627941" duration="257000" />
+      <workItem from="1467471206241" duration="3516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20660000" />
+    <option name="totallyTimeSpent" value="33185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -352,55 +381,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2839">
-          <caret line="167" column="33" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -424,7 +408,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -456,11 +439,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
           <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -484,7 +462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -508,11 +485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -552,11 +524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -588,11 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -624,11 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -660,11 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,6 +652,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/MotionCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/ListsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/speedy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -716,23 +697,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
+    <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+        <state relative-caret-position="544">
+          <caret line="32" column="91" selection-start-line="32" selection-start-column="91" selection-end-line="32" selection-end-column="91" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/register.html">
+    <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state relative-caret-position="408">
+          <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/ListsCtrl.js">
+    <entry file="file://$PROJECT_DIR$/www/templates/pembayaran.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -740,39 +721,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/menu-utama.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <marker date="1467409205009" expanded="false" signature="794:818" ph="..." />
+            <marker date="1467409205009" expanded="false" signature="1175:1199" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="139" column="41" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+        <state relative-caret-position="523">
+          <caret line="224" column="50" selection-start-line="224" selection-start-column="50" selection-end-line="224" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/bpjs.html">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/AppCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="191" selection-start-line="32" selection-start-column="16" selection-end-line="33" selection-end-column="191" />
+        <state relative-caret-position="1264">
+          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/speedy.html">
+    <entry file="file://$PROJECT_DIR$/www/templates/pulsa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="22" column="81" selection-start-line="22" selection-start-column="81" selection-end-line="22" selection-end-column="81" />
+        <state relative-caret-position="170">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/ComponentsCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="208" column="0" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
-          <folding>
-            <element signature="e#118#3551#0" expanded="false" />
-            <element signature="e#3651#6361#0" expanded="false" />
-            <element signature="e#9397#12625#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
