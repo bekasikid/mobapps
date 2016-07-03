@@ -1,6 +1,6 @@
-﻿app.controller('ListsCtrl', function ($scope, $stateParams, ionicMaterialMotion,$http,$state,$ionicPopup,$ionicHistory,$ionicLoading) {
+﻿app.controller('ListsCtrl', function ($scope, $stateParams, ionicMaterialMotion, $http, $state, $ionicPopup, $ionicHistory, $ionicLoading) {
 
-    var reset = function() {
+    var reset = function () {
         var inClass = document.querySelectorAll('.in');
         for (var i = 0; i < inClass.length; i++) {
             inClass[i].classList.remove('in');
@@ -20,66 +20,69 @@
         }
     };
 
-    $scope.ripple = function() {
+    $scope.ripple = function () {
         reset();
         document.getElementsByTagName('ion-list')[0].className += ' animate-ripple';
-        setTimeout(function() {
+        setTimeout(function () {
             ionicMaterialMotion.ripple();
         }, 500);
     };
 
-    $scope.fadeSlideInRight = function() {
+    $scope.fadeSlideInRight = function () {
         reset();
         document.getElementsByTagName('ion-list')[0].className += ' animate-fade-slide-in-right';
-        setTimeout(function() {
+        setTimeout(function () {
             ionicMaterialMotion.fadeSlideInRight();
         }, 500);
     };
 
-    $scope.fadeSlideIn = function() {
+    $scope.fadeSlideIn = function () {
         reset();
         document.getElementsByTagName('ion-list')[0].className += ' animate-fade-slide-in';
-        setTimeout(function() {
+        setTimeout(function () {
             ionicMaterialMotion.fadeSlideIn();
         }, 500);
     };
 
-    $scope.blinds = function() {
+    $scope.blinds = function () {
         reset();
         document.getElementsByTagName('ion-list')[0].className += ' animate-blinds';
-        setTimeout(function() {
+        setTimeout(function () {
             ionicMaterialMotion.blinds(); // ionic.material.motion.blinds(); //ionicMaterialMotion
         }, 500);
     };
 
     $scope.blinds();
 
-    $scope.login = function() {
+    $scope.login = function () {
 
-        $ionicLoading.show({ template:
-            '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
+        $ionicLoading.show({
+            template: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
         });
 
-        var link = uri+"partner/login";
-        var data = {"u" : $scope.data.username, "p": $scope.data.password};
+        var link = uri + "partner/login";
+        var data = {"u": $scope.data.username, "p": $scope.data.password};
 
         $scope.options = $scope.options || {};
-        $http.post(link,data).then(function(res){
+        $http.post(link, data).then(function (res) {
             $ionicLoading.hide();
-            if(res.status = 200){
-                if(res.data.noerr==0){
+            if (res.status = 200) {
+                if (res.data.noerr == 0) {
                     $scope.fullname = res.data.fullname;
                     window.localStorage.setItem("nextgen.username", res.data.fullname);
                     window.localStorage.setItem("nextgen.password", res.password);
                     window.localStorage.setItem("nextgen.response", JSON.stringify(res.data));
                     ky = CryptoJS.enc.Utf8.parse(key);
                     var iv = CryptoJS.enc.Base64.parse(res.data.iv); //nilai iv ada di response
-                    var plaintext = CryptoJS.AES.decrypt(res.data.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+                    var plaintext = CryptoJS.AES.decrypt(res.data.password_trx, ky, {
+                        iv: iv,
+                        padding: CryptoJS.pad.ZeroPadding
+                    }); //kata merupakan password yg terenkripsi
                     var pass = plaintext.toString(CryptoJS.enc.Utf8);
                     var timestamp = date_php("YmdHis");
                     var pass = CryptoJS.SHA1((res.data.username_trx + pass + timestamp)).toString();
-                    var link_balance = uri + 'routers/balance/userid/'+res.data.username_trx+'/sign/'+pass+'/timestamp/'+timestamp;
-                    $http.get(link_balance).success(function(row_b){
+                    var link_balance = uri + 'routers/balance/userid/' + res.data.username_trx + '/sign/' + pass + '/timestamp/' + timestamp;
+                    $http.get(link_balance).success(function (row_b) {
                         window.localStorage.setItem("nextgen.balance", row_b.balance);
                         $scope.balance = row_b.balance;
                         $scope.balance = window.localStorage.getItem("nextgen.balance");
@@ -88,16 +91,84 @@
                     $ionicHistory.nextViewOptions({
                         disableBack: true
                     });
-                }else{
+                } else {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Username / pasword salah',
                         template: res.data.status
                     });
                 }
-            }else{
+            } else {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Username / pasword salah',
                     template: res.data.status
+                });
+            }
+
+        });
+    };
+
+    $scope.reg = {
+        nik: "",
+        username: "",
+        password: "",
+        confirmpass: "",
+        name: "",
+        phone: "",
+    };
+    $scope.register = function () {
+
+        $ionicLoading.show({
+            template: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
+        });
+
+        if($scope.reg.password != $scope.reg.confirmpass){
+            var alertPopup = $ionicPopup.alert({
+                title: "Password tidak sama",
+                template: 'Password tidak sama, periksa kembali password yg anda masukkan'
+            });
+            return false;
+        }
+
+        var link = uri + "reg/pos/id/0";
+        var data = {
+            nik: $scope.reg.nik,
+            name: $scope.reg.name,
+            address: "",
+            kelurahan: "",
+            kecamatan: "",
+            kodepos: "",
+            store_name: "",
+            email: $scope.reg.email,
+            phone: $scope.reg.phone,
+            id_owner: 2,
+            deposit: 0,
+            id_parent: 0
+        };
+
+        $scope.options = $scope.options || {};
+        $http.post(link, data).then(function (res) {
+            $ionicLoading.hide();
+            if (res.status = 200) {
+                if(parseInt(res.data.noerr) == 100){
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Registrasi Berhasil',
+                        template: 'Registrasi Berhasil, tunggu email konfirmasi'
+                    });
+                    $state.go("app.login");
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                }else if(parseInt(res.data.noerr)==530){
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Registrasi gagal',
+                        template: 'Email sudah terdaftar, gunakan email lain'
+                    });
+                }
+
+            } else {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Registrasi gagal',
+                    template: 'Registrasi gagal, silahkan diulangi'
                 });
             }
 

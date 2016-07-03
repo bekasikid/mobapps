@@ -152,12 +152,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.extensions', {
-        url: '/extensions',
+    .state('app.laporan', {
+        url: '/laporan',
         views: {
             'menuContent': {
-                templateUrl: 'templates/extensions.html',
-                controller: 'ExtensionsCtrl'
+                templateUrl: 'templates/laporan.html',
+                controller: 'LaporanCtrl'
             }
         }
     })

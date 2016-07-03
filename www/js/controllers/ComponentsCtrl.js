@@ -13,8 +13,6 @@
     ky = CryptoJS.enc.Utf8.parse(key);
     var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
     var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
-    // console.log(plaintext.toString());
-    //     var text = CryptoJS.enc.Utf8.stringify(plaintext);
     var text = plaintext.toString(CryptoJS.enc.Utf8);
 
     var res = response.username_trx;
@@ -45,8 +43,8 @@
         });
 
     $scope.checkOperator = function () {
-        console.log($scope.prepaid.telco);
-        console.log($scope.prepaid.nominal);
+        // console.log($scope.prepaid.telco);
+        // console.log($scope.prepaid.nominal);
         if ($scope.prepaid.telco != 'tsel') {
             $scope.valid = true;
         } else {
@@ -56,6 +54,7 @@
     };
 
     var opCode = "";
+    $scope.opLogo = "";
     $scope.validateOperator = function () {
         if($scope.data.notelp==undefined){
             return false;
@@ -65,12 +64,15 @@
         if (axisObj.indexOf(prefixNo) != -1) {
             opCode = "axis";
             $scope.valid = true;
+            $scope.opLogo = "axis.png";
         } else if (sfObj.indexOf(prefixNo) != -1) {
             opCode = "sf";
             $scope.valid = true;
+            $scope.opLogo = "smartfren.jpg";
         } else if (isatObj.indexOf(prefixNo) != -1) {
             opCode = "isat";
             $scope.valid = true;
+            $scope.opLogo = "im3-ooredoo-logo.png";
         } else if (tselObj.indexOf(prefixNo) != -1) {
             opCode = "tsel";
             if($scope.prepaid.nominal!=50 && $scope.prepaid.nominal!=100){
@@ -78,12 +80,15 @@
             }else{
                 $scope.valid = true;
             }
+            $scope.opLogo = "simpati1.png";
         } else if (triObj.indexOf(prefixNo) != -1) {
             opCode = "tri";
             $scope.valid = true;
+            $scope.opLogo = "3.png";
         } else if (xlObj.indexOf(prefixNo) != -1) {
             opCode = "xl";
             $scope.valid = true;
+            $scope.opLogo = "xl.png";
         } else if (esiaObj.indexOf(prefixNo) != -1) {
             opCode = "esia";
             $scope.valid = true;
@@ -95,6 +100,7 @@
             if (prefixNo == "999") {
                 opCode = "bolt";
                 $scope.valid = true;
+                $scope.opLogo = "bolt.jpg";
             }
         }
         // console.log(opCode);
@@ -110,24 +116,28 @@
         var data = {
             "userid": response.username_trx,
             "reffid": "Mobile-" + timestamp + "-" + Math.floor(Math.random() * 700),
-            "target": $scope.data.notelp,
+            "target": $scope.prepaid.notelp,
             "amount": 0,
             "terminal": "terminal-mobapps-1",
             "timestamp": timestamp,
             "sign": pass,
             "prodName": opCode + $scope.prepaid.nominal
         };
-        console.log(data);
-        var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+        // console.log(data);
+        var link_beli = uri+"routers/router";
         $http({
             method: 'POST',
             url: link_beli,
             data: data,
             headers: {'Content-Type': 'application/json'}
         }).then(function (res) {
+            $scope.prepaid = {
+                notelp : "",
+                nominal : ""
+            };
             $ionicLoading.hide();
             if (res.status == 200) {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.status != "FAILED") {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Beli Pulsa Berhasil',
@@ -185,7 +195,7 @@
                 "sign": pass,
                 "prodName": "BPJS"
             };
-            var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+            var link_beli = uri+"outers/router";
             $http({
                 method: 'POST',
                 url: link_beli,
@@ -258,7 +268,7 @@
                 "sign": pass,
                 "prodName": "TELKOM"
             };
-            var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+            var link_beli = uri+"routers/router";
             $http({
                 method: 'POST',
                 url: link_beli,
@@ -347,7 +357,7 @@
                 "prodName": "TSEL50"
             };
             // console.log(data);
-            var link_beli = "http://103.16.78.45/admin/index.php/api/routers/router";
+            var link_beli = uri+"routers/router";
 
             $http({
                 method: 'POST',

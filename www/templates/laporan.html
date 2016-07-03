@@ -1,0 +1,26 @@
+﻿<ion-view view-title="Laporan">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <div class="item card-item" ng-repeat="item in items">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <!--<span class="avatar" style="background-image: url('img/jon-snow.jpg');"></span>-->
+                    <strong>{{item.prodName.toUpperCase()}}</strong> - {{item.target}}
+                    <div class="card-footer text-right">
+                        <i class="icon ion-checkmark-round positive" ng-if="parseInt(item.status_trx)==100"></i>
+                        <i class="icon ion-close-round assertive" ng-if="parseInt(item.status_trx)>=500 && parseInt(item.status_trx)<600"></i>
+                        <i class="icon ion-close-round assertive" ng-if="parseInt(item.status_trx)>300 && parseInt(item.status_trx)<400"></i>
+                        <i class="icon ion-loop balanced" ng-if="parseInt(item.status_trx)>=600 && parseInt(item.status_trx)<700"></i>
+                        {{item.status_trx}}
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> {{item.date_created}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="3%" ng-if="adaData">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

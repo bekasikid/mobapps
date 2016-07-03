@@ -30,20 +30,32 @@
             </div>
             <div class="list">
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="Username">
+                    <span class="input-label">Email</span>
+                    <input type="text" placeholder="Email" ng-model="reg.email">
                 </label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Password</span>
-                    <input type="text" placeholder="Password">
+                    <input type="password" placeholder="Password" ng-model="reg.password">
                 </label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Password Lagi</span>
-                    <input type="text" placeholder="Password Lagi">
+                    <input type="password" placeholder="Password Lagi" ng-model="reg.confirmpass">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">No KTP</span>
+                    <input type="text" placeholder="No KTP" ng-model="reg.nik">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Name</span>
+                    <input type="text" placeholder="Name" ng-model="reg.name">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Phone</span>
+                    <input type="text" placeholder="Phone" ng-model="reg.phone">
                 </label>
             </div>
             <div class="padding">
-                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" >Daftar</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-click="register()">Daftar</button>
                 <div class="text-center">
                     Or
                 </div>
