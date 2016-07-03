@@ -1,4 +1,4 @@
-﻿app.controller('PulsaCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading) {
+﻿app.controller('PulsaCtrl', function ($scope,$state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading,$timeout) {
     var axisObj = ["0831", "0832", "0836", "0837", "0838", "0835", "0839"];
     var sfObj = ["0889", "0886", "0887", "0888", "0881", "0882", "0883"];
     var isatObj = ["0814", "0815", "0816", "0855", "0856", "0857", "0858"];
@@ -22,7 +22,12 @@
     var tsel = false;
     $scope.prepaid = {
         telco: 0,
-        nominal: 0
+        nominal: 0,
+        opLogo : ""
+    };
+    $scope.getLogo = function(){
+        var logo = "../img/"+$scope.prepaid.opLogo;
+        return logo;
     };
     $scope.valid = false;
     $cordovaGeolocation
@@ -54,25 +59,25 @@
     };
 
     var opCode = "";
-    $scope.opLogo = "";
+
     $scope.validateOperator = function () {
-        if($scope.data.notelp==undefined){
+        if($scope.prepaid.notelp==undefined){
             return false;
         }
-        var prefixNo = $scope.data.notelp.substring(0, 4);
+        var prefixNo = $scope.prepaid.notelp.substring(0, 4);
         // console.log(prefixNo);
         if (axisObj.indexOf(prefixNo) != -1) {
             opCode = "axis";
             $scope.valid = true;
-            $scope.opLogo = "axis.png";
+            $scope.prepaid.opLogo = "axis.png";
         } else if (sfObj.indexOf(prefixNo) != -1) {
             opCode = "sf";
             $scope.valid = true;
-            $scope.opLogo = "smartfren.jpg";
+            $scope.prepaid.opLogo = "smartfren.jpg";
         } else if (isatObj.indexOf(prefixNo) != -1) {
             opCode = "isat";
             $scope.valid = true;
-            $scope.opLogo = "im3-ooredoo-logo.png";
+            $scope.prepaid.opLogo = "im3-ooredoo-logo.png";
         } else if (tselObj.indexOf(prefixNo) != -1) {
             opCode = "tsel";
             if($scope.prepaid.nominal!=50 && $scope.prepaid.nominal!=100){
@@ -80,15 +85,15 @@
             }else{
                 $scope.valid = true;
             }
-            $scope.opLogo = "simpati1.png";
+            $scope.prepaid.opLogo = "simpati1.png";
         } else if (triObj.indexOf(prefixNo) != -1) {
             opCode = "tri";
             $scope.valid = true;
-            $scope.opLogo = "3.png";
+            $scope.prepaid.opLogo = "3.png";
         } else if (xlObj.indexOf(prefixNo) != -1) {
             opCode = "xl";
             $scope.valid = true;
-            $scope.opLogo = "xl.png";
+            $scope.prepaid.opLogo = "xl.png";
         } else if (esiaObj.indexOf(prefixNo) != -1) {
             opCode = "esia";
             $scope.valid = true;
@@ -96,20 +101,25 @@
             opCode = "flexi";
             $scope.valid = true;
         } else {
-            var prefixNo = $scope.data.notelp.substring(0, 4);
+            var prefixNo = $scope.prepaid.notelp.substring(0, 4);
             if (prefixNo == "999") {
                 opCode = "bolt";
                 $scope.valid = true;
-                $scope.opLogo = "bolt.jpg";
+                $scope.prepaid.opLogo = "bolt.jpg";
             }
         }
+        // console.log($scope.prepaid.opLogo);
         // console.log(opCode);
     };
 
     $scope.beli = function () {
-        $ionicLoading.show({ template:
-            '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
+        $scope.loadingIndicator = $ionicLoading.show({
+            template:'<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
         });
+        $timeout(function(){
+            $ionicLoading.hide();
+            $state.go('app.laporan');
+        },18000);
 
         var timestamp = date_php("YmdHis");
         var pass = CryptoJS.SHA1(('' + res + password + timestamp)).toString();

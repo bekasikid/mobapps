@@ -82,10 +82,9 @@
                     var timestamp = date_php("YmdHis");
                     var pass = CryptoJS.SHA1((res.data.username_trx + pass + timestamp)).toString();
                     var link_balance = uri + 'routers/balance/userid/' + res.data.username_trx + '/sign/' + pass + '/timestamp/' + timestamp;
-                    $http.get(link_balance).success(function (row_b) {
-                        window.localStorage.setItem("nextgen.balance", row_b.balance);
-                        $scope.balance = row_b.balance;
-                        $scope.balance = window.localStorage.getItem("nextgen.balance");
+                    $http.get(link_balance).then(function (row_b) {
+                        $scope.balance = row_b.data.balance;
+                        window.localStorage.setItem("nextgen.balance", $scope.balance);
                     });
                     $state.go("app.mainmenu");
                     $ionicHistory.nextViewOptions({
