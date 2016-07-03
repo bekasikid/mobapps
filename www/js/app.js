@@ -223,7 +223,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'templates/menu-utama.html',
-                controller: 'ExtensionsCtrl'
+                controller: 'MainMenuCtrl'
             }
         }
     })
@@ -280,6 +280,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     // if none of the above states are matched, use this as the fallback
     // $urlRouterProvider.otherwise('/app/information');
-    $urlRouterProvider.otherwise('/app/pulsa');
+    $urlRouterProvider.otherwise('/app/login');
     // $urlRouterProvider.otherwise('/app/tukar');
 });

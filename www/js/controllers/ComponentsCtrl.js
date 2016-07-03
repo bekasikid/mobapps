@@ -1,4 +1,4 @@
-﻿app.controller('PulsaCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation) {
+﻿app.controller('PulsaCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading) {
     var axisObj = ["0831", "0832", "0836", "0837", "0838", "0835", "0839"];
     var sfObj = ["0889", "0886", "0887", "0888", "0881", "0882", "0883"];
     var isatObj = ["0814", "0815", "0816", "0855", "0856", "0857", "0858"];
@@ -9,18 +9,16 @@
     var flexiObj = ["0212", "0217", "0711"];
     var boltObj = ["999"];
 
-    var response = JSON.parse(window.localStorage.getItem("response"));
-    key = CryptoJS.enc.Utf8.parse(key);
+    var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
+    ky = CryptoJS.enc.Utf8.parse(key);
     var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-    var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+    var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
     // console.log(plaintext.toString());
     //     var text = CryptoJS.enc.Utf8.stringify(plaintext);
     var text = plaintext.toString(CryptoJS.enc.Utf8);
 
     var res = response.username_trx;
     var password = text;
-    console.log(password);
-
 
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     var tsel = false;
@@ -54,7 +52,7 @@
         } else {
             $scope.valid = tsel;
         }
-        console.log($scope.valid);
+        // console.log($scope.valid);
     };
 
     var opCode = "";
@@ -63,13 +61,16 @@
             return false;
         }
         var prefixNo = $scope.data.notelp.substring(0, 4);
-        console.log(prefixNo);
+        // console.log(prefixNo);
         if (axisObj.indexOf(prefixNo) != -1) {
             opCode = "axis";
+            $scope.valid = true;
         } else if (sfObj.indexOf(prefixNo) != -1) {
             opCode = "sf";
+            $scope.valid = true;
         } else if (isatObj.indexOf(prefixNo) != -1) {
             opCode = "isat";
+            $scope.valid = true;
         } else if (tselObj.indexOf(prefixNo) != -1) {
             opCode = "tsel";
             if($scope.prepaid.nominal!=50 && $scope.prepaid.nominal!=100){
@@ -79,22 +80,31 @@
             }
         } else if (triObj.indexOf(prefixNo) != -1) {
             opCode = "tri";
+            $scope.valid = true;
         } else if (xlObj.indexOf(prefixNo) != -1) {
             opCode = "xl";
+            $scope.valid = true;
         } else if (esiaObj.indexOf(prefixNo) != -1) {
             opCode = "esia";
+            $scope.valid = true;
         } else if (flexiObj.indexOf(prefixNo) != -1) {
             opCode = "flexi";
+            $scope.valid = true;
         } else {
             var prefixNo = $scope.data.notelp.substring(0, 4);
             if (prefixNo == "999") {
                 opCode = "bolt";
+                $scope.valid = true;
             }
         }
-        console.log(opCode);
+        // console.log(opCode);
     };
 
     $scope.beli = function () {
+        $ionicLoading.show({ template:
+            '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
+        });
+
         var timestamp = date_php("YmdHis");
         var pass = CryptoJS.SHA1(('' + res + password + timestamp)).toString();
         var data = {
@@ -115,8 +125,9 @@
             data: data,
             headers: {'Content-Type': 'application/json'}
         }).then(function (res) {
-
+            $ionicLoading.hide();
             if (res.status == 200) {
+                console.log(res.data);
                 if (res.data.status != "FAILED") {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Beli Pulsa Berhasil',
@@ -137,8 +148,8 @@
         });
     }
 })
-    .controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
 
+    .controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
         $scope.bpjs = {
             target: "",
             nama: "",
@@ -150,10 +161,10 @@
 
         $scope.beli = function () {
             $scope.inq = false;
-            var response = JSON.parse(window.localStorage.getItem("response"));
-            key = CryptoJS.enc.Utf8.parse(key);
+            var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
+            ky = CryptoJS.enc.Utf8.parse(key);
             var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-            var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {
+            var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {
                 iv: iv,
                 padding: CryptoJS.pad.ZeroPadding
             }); //kata merupakan password yg terenkripsi
@@ -212,11 +223,14 @@
 
         };
     })
+    .controller('MainMenuCtrl', function ($scope, $stateParams, ionicMaterialInk, $http,$ionicHistory) {
+
+    })
     .controller('TelkomSpeedyCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
-        var response = JSON.parse(window.localStorage.getItem("response"));
-        key = CryptoJS.enc.Utf8.parse(key);
+        var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
+        ky = CryptoJS.enc.Utf8.parse(key);
         var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-        var plaintext = CryptoJS.AES.decrypt(response.password_trx, key, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
+        var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
         var password = plaintext.toString(CryptoJS.enc.Utf8);
         var uname = response.username_trx;
 
@@ -297,11 +311,11 @@
 
         $scope.beli = function () {
 
-            var response = JSON.parse(window.localStorage.getItem("response"));
+            var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
 
             var today = new Date();
 
-            var response = JSON.parse(window.localStorage.getItem("response"));
+            var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
             ky = CryptoJS.enc.Utf8.parse(key);
             var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
             var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {

@@ -57,51 +57,17 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
         return $scope.shownGroup === group;
     };
     $scope.data = {};
-    $scope.fullname = window.localStorage.getItem("username");
-    $scope.balance  = window.localStorage.getItem("balance");
-
-    $scope.login = function() {
-        var link = uri+"partner/login";
-        var data = {"u" : $scope.data.username, "p": $scope.data.password};
-
-        $scope.options = $scope.options || {};
-        $http.post(link,data).then(function(res){
-            console.log(res);
-            if(res.status = 200){
-                window.localStorage.setItem("username", res.data.fullname);
-                window.localStorage.setItem("password", res.password);
-                window.localStorage.setItem("response", JSON.stringify(res.data));
-
-                ky = CryptoJS.enc.Utf8.parse(key);
-                var iv = CryptoJS.enc.Base64.parse(res.data.iv); //nilai iv ada di response
-                var plaintext = CryptoJS.AES.decrypt(res.data.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
-                var pass = plaintext.toString(CryptoJS.enc.Utf8);
-                var timestamp = date_php("YmdHis");
-                var pass = CryptoJS.SHA1((res.data.username_trx + pass + timestamp)).toString();
-
-                var link_balance = uri + 'routers/balance/userid/'+res.data.username_trx+'/sign/'+pass+'/timestamp/'+timestamp;
-                $http.get(link_balance).success(function(row_b){
-                    window.localStorage.setItem("balance", row_b.balance);
-                    $scope.balance = row_b.balance;
-                    $state.go("app.mainmenu");
-                    $ionicHistory.nextViewOptions({
-                        disableBack: true
-                    });
-                    $scope.fullname = window.localStorage.getItem("username");
-                    $scope.balance = window.localStorage.getItem("balance");
-                });
-            }else{
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Username / pasword salah',
-                    template: res.data.status
-                });
-            }
-
-        });
-    };
+    
+    $scope.getName = function(){
+        return window.localStorage.getItem("nextgen.username");
+    }
+    
+    $scope.getBalance = function(){
+        return window.localStorage.getItem("nextgen.balance");
+    }
 
     $scope.isLoggedIn = function() {
-        if (window.localStorage.getItem("username") !== undefined && window.localStorage.getItem("password") !== undefined) {
+        if (window.localStorage.getItem("nextgen.username") !== undefined && window.localStorage.getItem("nextgen.password") !== undefined) {
             return true;
         } else {
             return false;
@@ -109,7 +75,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
     };
 
     $scope.isLoggedInClass = function() {
-        if ((window.localStorage.getItem("username")) !== null && window.localStorage.getItem("password") !== null) {
+        if ((window.localStorage.getItem("nextgen.username")) !== null && window.localStorage.getItem("nextgen.password") !== null) {
             return '';
         } else {
             return 'hidden';
@@ -118,7 +84,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
     };
 
     $scope.isLoggedInClassLogin = function() {
-        if (window.localStorage.getItem("username") !== null && window.localStorage.getItem("password") !== null) {
+        if (window.localStorage.getItem("nextgen.username") !== null && window.localStorage.getItem("nextgen.password") !== null) {
             return 'hidden';
         } else {
             return '';
@@ -126,10 +92,10 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
     };
 
     $scope.logout = function() {
-        window.localStorage.removeItem("username");
-        window.localStorage.removeItem("balance");
-        window.localStorage.removeItem("response");
-        window.localStorage.removeItem("password");
+        window.localStorage.removeItem("nextgen.username");
+        window.localStorage.removeItem("nextgen.balance");
+        window.localStorage.removeItem("nextgen.response");
+        window.localStorage.removeItem("nextgen.password");
         window.location = "#/app/information";
         $ionicHistory.nextViewOptions({
             disableBack: true
