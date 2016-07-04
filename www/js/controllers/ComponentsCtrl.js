@@ -23,7 +23,8 @@
     $scope.prepaid = {
         telco: 0,
         nominal: 0,
-        opLogo : ""
+        opLogo : "",
+        opCode : ""
     };
     $scope.getLogo = function(){
         var logo = "../img/"+$scope.prepaid.opLogo;
@@ -108,7 +109,8 @@
                 $scope.prepaid.opLogo = "bolt.jpg";
             }
         }
-        // console.log($scope.prepaid.opLogo);
+        $scope.prepaid.opCode = opCode;
+        console.log($scope.prepaid.opLogo);
         // console.log(opCode);
     };
 
