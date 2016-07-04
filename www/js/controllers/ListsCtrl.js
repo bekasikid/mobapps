@@ -90,16 +90,21 @@
                     $ionicHistory.nextViewOptions({
                         disableBack: true
                     });
+                } else if(res.data.noerr == 2) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Login gagal',
+                        template: "Username sedang digunakan"
+                    });
                 } else {
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Username / pasword salah',
-                        template: res.data.status
+                        title: 'Login gagal',
+                        template: "Username / Password salah"
                     });
                 }
             } else {
                 var alertPopup = $ionicPopup.alert({
-                    title: 'Username / pasword salah',
-                    template: res.data.status
+                    title: 'Login gagal',
+                    template: "Username / Password salah"
                 });
             }
 
