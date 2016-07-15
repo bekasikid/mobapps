@@ -49,4 +49,10 @@
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
+}).controller('ProfileCtrl', function ($scope, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, ionicMaterialMotion, ionicMaterialInk,$http) {
+    $scope.profile = {
+        fullname : window.localStorage.getItem("nextgen.username"),
+        balance : window.localStorage.getItem("nextgen.balance")
+    };
+
 });

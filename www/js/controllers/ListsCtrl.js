@@ -1,4 +1,4 @@
-﻿app.controller('ListsCtrl', function ($scope, $stateParams, ionicMaterialMotion, $http, $state, $ionicPopup, $ionicHistory, $ionicLoading) {
+﻿app.controller('ListsCtrl', function ($scope, $stateParams, ionicMaterialMotion, $http, $state, $ionicPopup, $ionicHistory, $ionicLoading,$rootScope) {
 
     var reset = function () {
         var inClass = document.querySelectorAll('.in');
@@ -83,8 +83,8 @@
                     var pass = CryptoJS.SHA1((res.data.username_trx + pass + timestamp)).toString();
                     var link_balance = uri + 'routers/balance/userid/' + res.data.username_trx + '/sign/' + pass + '/timestamp/' + timestamp;
                     $http.get(link_balance).then(function (row_b) {
-                        $scope.balance = row_b.data.balance;
-                        window.localStorage.setItem("nextgen.balance", $scope.balance);
+                        $rootScope.balance = row_b.data.balance;
+                        window.localStorage.setItem("nextgen.balance", $rootScope.balance);
                     });
                     $state.go("app.mainmenu");
                     $ionicHistory.nextViewOptions({

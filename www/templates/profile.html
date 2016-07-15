@@ -3,33 +3,37 @@
     <ion-content>
 		<div class="hero " style="background-image: url('img/blurred-background-2.jpg');">
             <div class="content">
-                <div class="avatar" style="background-image: url('img/sansa-2.jpg');"></div>
-                <h3><a class="light">{{ fullname }}</a></h3>
-                <h4 style="color:dark">Saldo : Rp. {{ balance }},- |  1200 Poin</h4>
+                <div class="avatar" style="background-image: url('img/logo.jpg');"></div>
+                <h3><a class="light">{{ profile.fullname }}</a></h3>
+                <h4 style="color:dark">Saldo : {{ profile.balance | currency : "Rp. ":0 }}</h4>
             </div>
         </div>
-        <div class="tabs tabs-dark tabs-icon-top static">
-            <a ui-sref="app.activity" class="tab-item" href="#/app/activity">
-                <i class="icon ion-arrow-graph-up-right"></i> Topup
-            </a>
-            <a ui-sref="app.friends" class="tab-item" href="#/app/friends">
-                <i class="icon ion-android-people"></i> History
-            </a>
-        </div>
         <h4 class="content padding double-padding-x">History</h4>
-        <div class="list animate-fade-slide-in-right">
-            <a ui-sref="app.friends" class="item item-icon-right in done" href="#/app/friends" style="transition-delay: 0.33s;border-bottom: 1px solid black">
-                <h2>Pembelian Pulsa Telkomsel</h2>
-                <p>NO REFERENSI : 901888229902909</p>
-            </a>
-            <a ui-sref="app.friends" class="item item-icon-right in" href="#/app/friends" style="transition-delay: 0.36s;border-bottom: 1px solid black">
-                <h2>Pembelian Pulsa Telkomsel</h2>
-                <p>NO REFERENSI : 901888229902909</p>
-            </a>
-            <a ui-sref="app.friends" class="item item-icon-right in" href="#/app/friends" style="transition-delay: 0.38s;border-bottom: 1px solid black">
-                <h2>Pembelian Pulsa Telkomsel</h2>
-                <p>NO REFERENSI : 901888229902909</p>
-            </a>
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nama </span>
+                <input type="text" placeholder="Nama" ng-model="profile.fullname">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Password Lama </span>
+                <input type="password" placeholder="Password Lama" ng-model="profile.password.oldPass">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Password Baru</span>
+                <input type="password" placeholder="Password Baru" ng-model="profile.password.newPass">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Password Konfirmasi</span>
+                <input type="password" placeholder="Password Baru" ng-model="profile.password.confirmPass">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Pin</span>
+                <input type="password" placeholder="Pin" ng-model="profile.pin.newPin">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Pin Konfirmasi</span>
+                <input type="password" placeholder="Pin Konfirmasi" ng-model="profile.pin.confirmPin">
+            </label>
         </div>
     </ion-content>
 </ion-view>

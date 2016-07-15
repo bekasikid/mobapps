@@ -1,4 +1,4 @@
-﻿app.controller('PulsaCtrl', function ($scope,$state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading,$timeout) {
+﻿app.controller('PulsaCtrl', function ($scope,$rootScope,$state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading,$timeout) {
     var axisObj = ["0831", "0832", "0836", "0837", "0838", "0835", "0839"];
     var sfObj = ["0889", "0886", "0887", "0888", "0881", "0882", "0883"];
     var isatObj = ["0814", "0815", "0816", "0855", "0856", "0857", "0858"];
@@ -8,26 +8,18 @@
     var esiaObj = ["0218", "0219", "0214", "0215", "0219", "0711"];
     var flexiObj = ["0212", "0217", "0711"];
     var boltObj = ["999"];
-
-    var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
-    ky = CryptoJS.enc.Utf8.parse(key);
-    var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-    var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
-    var text = plaintext.toString(CryptoJS.enc.Utf8);
-
-    var res = response.username_trx;
-    var password = text;
-
+    
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     var tsel = false;
-    $scope.prepaid = {
+    $rootScope.prepaid = {
         telco: 0,
         nominal: 0,
         opLogo : "",
-        opCode : ""
+        opCode : "",
+        pin : ""
     };
     $scope.getLogo = function(){
-        var logo = "../img/"+$scope.prepaid.opLogo;
+        var logo = "../img/"+$rootScope.prepaid.opLogo;
         return logo;
     };
     $scope.valid = false;
@@ -49,9 +41,7 @@
         });
 
     $scope.checkOperator = function () {
-        // console.log($scope.prepaid.telco);
-        // console.log($scope.prepaid.nominal);
-        if ($scope.prepaid.telco != 'tsel') {
+        if ($rootScope.prepaid.telco != 'tsel') {
             $scope.valid = true;
         } else {
             $scope.valid = tsel;
@@ -62,39 +52,39 @@
     var opCode = "";
 
     $scope.validateOperator = function () {
-        if($scope.prepaid.notelp==undefined){
+        if($rootScope.prepaid.notelp==undefined){
             return false;
         }
-        var prefixNo = $scope.prepaid.notelp.substring(0, 4);
+        var prefixNo = $rootScope.prepaid.notelp.substring(0, 4);
         // console.log(prefixNo);
         if (axisObj.indexOf(prefixNo) != -1) {
             opCode = "axis";
             $scope.valid = true;
-            $scope.prepaid.opLogo = "axis.png";
+            $rootScope.prepaid.opLogo = "axis.png";
         } else if (sfObj.indexOf(prefixNo) != -1) {
             opCode = "sf";
             $scope.valid = true;
-            $scope.prepaid.opLogo = "smartfren.jpg";
+            $rootScope.prepaid.opLogo = "smartfren.jpg";
         } else if (isatObj.indexOf(prefixNo) != -1) {
             opCode = "isat";
             $scope.valid = true;
-            $scope.prepaid.opLogo = "im3-ooredoo-logo.png";
+            $rootScope.prepaid.opLogo = "im3-ooredoo-logo.png";
         } else if (tselObj.indexOf(prefixNo) != -1) {
             opCode = "tsel";
-            if($scope.prepaid.nominal!=50 && $scope.prepaid.nominal!=100){
+            if($rootScope.prepaid.nominal!=50 && $rootScope.prepaid.nominal!=100){
                 $scope.valid = tsel;
             }else{
                 $scope.valid = true;
             }
-            $scope.prepaid.opLogo = "simpati1.png";
+            $rootScope.prepaid.opLogo = "simpati1.png";
         } else if (triObj.indexOf(prefixNo) != -1) {
             opCode = "tri";
             $scope.valid = true;
-            $scope.prepaid.opLogo = "3.png";
+            $rootScope.prepaid.opLogo = "3.png";
         } else if (xlObj.indexOf(prefixNo) != -1) {
             opCode = "xl";
             $scope.valid = true;
-            $scope.prepaid.opLogo = "xl.png";
+            $rootScope.prepaid.opLogo = "xl.png";
         } else if (esiaObj.indexOf(prefixNo) != -1) {
             opCode = "esia";
             $scope.valid = true;
@@ -102,73 +92,27 @@
             opCode = "flexi";
             $scope.valid = true;
         } else {
-            var prefixNo = $scope.prepaid.notelp.substring(0, 4);
+            var prefixNo = $rootScope.prepaid.notelp.substring(0, 4);
             if (prefixNo == "999") {
                 opCode = "bolt";
                 $scope.valid = true;
-                $scope.prepaid.opLogo = "bolt.jpg";
+                $rootScope.prepaid.opLogo = "bolt.jpg";
             }
         }
-        $scope.prepaid.opCode = opCode;
-        console.log($scope.prepaid.opLogo);
+        $rootScope.prepaid.opCode = opCode;
+        console.log($rootScope.prepaid.opLogo);
         // console.log(opCode);
     };
 
-    $scope.beli = function () {
-        $scope.loadingIndicator = $ionicLoading.show({
-            template:'<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
-        });
-        $timeout(function(){
-            $ionicLoading.hide();
-            $state.go('app.laporan');
-        },18000);
 
-        var timestamp = date_php("YmdHis");
-        var pass = CryptoJS.SHA1(('' + res + password + timestamp)).toString();
-        var data = {
-            "userid": response.username_trx,
-            "reffid": "Mobile-" + timestamp + "-" + Math.floor(Math.random() * 700),
-            "target": $scope.prepaid.notelp,
-            "amount": 0,
-            "terminal": "terminal-mobapps-1",
-            "timestamp": timestamp,
-            "sign": pass,
-            "prodName": opCode + $scope.prepaid.nominal
-        };
-        // console.log(data);
-        var link_beli = uri+"routers/router";
-        $http({
-            method: 'POST',
-            url: link_beli,
-            data: data,
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (res) {
-            $scope.prepaid = {
-                notelp : "",
-                nominal : ""
-            };
-            $ionicLoading.hide();
-            if (res.status == 200) {
-                // console.log(res.data);
-                if (res.data.status != "FAILED") {
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Beli Pulsa Berhasil',
-                        template: 'Selamat anda telah membeli pulsa'
-                    });
-                } else {
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Beli Pulsa Gagal',
-                        template: res.data.message
-                    });
-                }
-            } else {
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Beli Pulsa Gagal',
-                    template: res.data.status
-                });
-            }
-        });
-    }
+    $scope.beli = function() {
+        $state.go("app.pulsa-confirm");
+    };
+}).controller('PulsaConfirmCtrl', function ($scope,$rootScope,$state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation,$ionicLoading,$timeout,buyFactory) {
+
+    $scope.beli = function () {
+        buyFactory.trx($rootScope.prepaid.pin,"");
+    };
 })
 
     .controller('BpjsCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
@@ -248,14 +192,7 @@
     .controller('MainMenuCtrl', function ($scope, $stateParams, ionicMaterialInk, $http,$ionicHistory) {
 
     })
-    .controller('TelkomSpeedyCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup) {
-        var response = JSON.parse(window.localStorage.getItem("nextgen.response"));
-        ky = CryptoJS.enc.Utf8.parse(key);
-        var iv = CryptoJS.enc.Base64.parse(response.iv); //nilai iv ada di response
-        var plaintext = CryptoJS.AES.decrypt(response.password_trx, ky, {iv: iv, padding: CryptoJS.pad.ZeroPadding}); //kata merupakan password yg terenkripsi
-        var password = plaintext.toString(CryptoJS.enc.Utf8);
-        var uname = response.username_trx;
-
+    .controller('TelkomSpeedyCtrl', function ($scope, $stateParams, ionicMaterialInk, $http, $ionicPopup,paymentFactory) {
         $scope.telkom = {
             target: "",
             nama: "",

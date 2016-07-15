@@ -1,54 +1,56 @@
 <ion-view view-title="Pembelian Pulsa">
-<ion-content>
-<div class="im-wrapper">
-  <div class="list">
-    <br><br>
-    <label class="item item-avatar item-input item-floating-label">
-        <img src="img/axis.png" ng-if="prepaid.opCode =='axis'" />
-        <img src="img/smartfren.jpg" ng-if="prepaid.opCode =='sf'" />
-        <img src="img/im3-ooredoo-logo.png" ng-if="prepaid.opCode =='isat'" />
-        <img src="img/simpati1.png" ng-if="(prepaid.opCode =='tsel')" />
-        <img src="img/3.png" ng-if="prepaid.opCode =='tri'" />
-        <img src="img/xl.png" ng-if="prepaid.opCode =='xl'" />
-        <img src="img/bolt.jpg" ng-if="prepaid.opCode =='bolt'" />
-      <span class="input-label">Nomor Telepon</span>
-      <input type="tel" placeholder="Contoh 081234567890" ng-model="prepaid.notelp" ng-change="validateOperator()">
-    </label>
-    <br>
-    <label class="item item-input item-select hidden">
-        <div class="input-label">
-            Operator
+    <ion-content>
+        <div class="im-wrapper">
+            <div class="list">
+                <br><br>
+                <label class="item item-avatar item-input item-floating-label">
+                    <img src="img/axis.png" ng-if="$root.prepaid.opCode =='axis'"/>
+                    <img src="img/smartfren.jpg" ng-if="$root.prepaid.opCode =='sf'"/>
+                    <img src="img/im3-ooredoo-logo.png" ng-if="$root.prepaid.opCode =='isat'"/>
+                    <img src="img/simpati1.png" ng-if="($root.prepaid.opCode =='tsel')"/>
+                    <img src="img/3.png" ng-if="$root.prepaid.opCode =='tri'"/>
+                    <img src="img/xl.png" ng-if="$root.prepaid.opCode =='xl'"/>
+                    <img src="img/bolt.jpg" ng-if="$root.prepaid.opCode =='bolt'"/>
+                    <span class="input-label">Nomor Telepon</span>
+                    <input type="tel" placeholder="Contoh 081234567890" ng-model="$root.prepaid.notelp"
+                           ng-change="validateOperator()">
+                </label>
+                <br>
+                <label class="item item-input item-select hidden">
+                    <div class="input-label">
+                        Operator
+                    </div>
+                    <select ng-model="$root.prepaid.telco" ng-change="checkOperator()">
+                        <option value="tri">Tri</option>
+                        <option selected="" value="isat">Indosat</option>
+                        <option value="sf">Smartfren</option>
+                        <option value="tsel">Telkomsel</option>
+                        <option value="xl">XL</option>
+                        <option value="esia">Esia</option>
+                    </select>
+                </label>
+                <br>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Nominal
+                    </div>
+                    <select ng-model="$root.prepaid.nominal" ng-change="validateOperator()">
+                        <option value="5" selected>5.000</option>
+                        <option value="10" selected>10.000</option>
+                        <option value="20">20.000</option>
+                        <option value="25">25.000</option>
+                        <option value="50">50.000</option>
+                        <option value="100">100.000</option>
+                    </select>
+                </label>
+                <br><br>
+                <div>Syarat dan ketentuan berlaku</div>
+                <br>
+                <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1"
+                        ng-click="beli()" ng-disabled="!valid">
+                    <i class="icon ion-android-cart"></i> Beli
+                </button>
+            </div>
         </div>
-        <select ng-model="prepaid.telco" ng-change="checkOperator()">
-            <option value="tri">Tri</option>
-            <option selected="" value="isat">Indosat</option>
-            <option value="sf">Smartfren</option>
-            <option value="tsel">Telkomsel</option>
-            <option value="xl">XL</option>
-            <option value="esia">Esia</option>
-        </select>
-    </label>
-    <br>
-    <label class="item item-input item-select">
-        <div class="input-label">
-            Nominal
-        </div>
-        <select ng-model="prepaid.nominal" ng-change="validateOperator()">
-            <option value="5" selected>5.000</option>
-            <option value="10" selected>10.000</option>
-            <option value="20">20.000</option>
-            <option value="25">25.000</option>
-            <option value="50">50.000</option>
-            <option value="100">100.000</option>
-        </select>
-    </label>
-    <br><br>
-    <div>Syarat dan ketentuan berlaku </div>
-    <br>
-    <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="beli()" ng-disabled="!valid">
-      <i class="icon ion-android-cart"></i> Beli
-    </button>
-  </div>
-</div>
-</ion-content>
+    </ion-content>
 </ion-view>

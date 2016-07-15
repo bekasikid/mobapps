@@ -14,7 +14,7 @@
         <div ng-class="isLoggedInClass()">
             <ion-header-bar class="expanded">
                 <div style="text-align: center;margin: 0px auto">
-                    <img src="img/sansa-2.jpg" class="avatar motion spin fade" style="left:35%">
+                    <img src="img/logo.jpg" class="avatar motion spin fade" style="left:35%">
                 </div>
                 <br>
                 <div class="menu-bottom" style="color:white;">
@@ -22,7 +22,7 @@
                     <span style="font-weight: normal;font-size: 12px;color:white">
                         <i class="fa fa-credit-card"></i>
                         <!-- Saldo : Rp. 13.000,- | 1200 Poin -->
-                        Saldo : {{ getBalance() | currency : "Rp. ": 0}}
+                        Saldo : {{ $root.balance | currency : "Rp. ": 0}}
                     </span>
                 </div>
             </ion-header-bar>
@@ -60,9 +60,6 @@
                         <i class="fa fa-gift"></i> Laporan
                     </ion-item>
                 </ion-list>
-                <ion-item nav-clear menu-close href="#/app/information">
-                    <i class="fa fa-info"></i> Infomasi
-                </ion-item>
                 <hr>
                 <ion-list>
                     <ion-item nav-clear menu-close href="#/app/profile">
