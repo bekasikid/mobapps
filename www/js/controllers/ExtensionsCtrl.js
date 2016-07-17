@@ -55,4 +55,8 @@
         balance : window.localStorage.getItem("nextgen.balance")
     };
 
+    $scope.rubah = function (){
+
+    };
+
 });

@@ -6,16 +6,53 @@
         	</div>
             <div class="list">
                 <br>
-                <label class="item item-input item-floating-label">
+                <label class="item item-input item-stacked-label">
                     <span class="input-label">No ID Pelanggan</span>
-                    <input type="text" placeholder="No ID Pelanggan">
+                    <input type="tel" placeholder="No ID Pelanggan" ng-model="pln.target">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq">
+                    <span class="input-label">Nama </span>
+                    <input type="text" readonly="readonly" placeholder="Nama" ng-model="pln.nama">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Periode </span>
+                    <input type="text" readonly="readonly" placeholder="Periode" ng-model="pln.periode">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Tarif/Daya </span>
+                    <input type="text" readonly="readonly" placeholder="tarifdaya" ng-model="pln.tarifdaya">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Penggunaan </span>
+                    <input type="text" readonly="readonly" placeholder="Penggunaan" ng-model="pln.penggunaan">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Tagihan </span>
+                    <input readonly="readonly" type="text" placeholder="Tagihan" ng-value="pln.tagihan|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Admin </span>
+                    <input readonly="readonly" type="text" placeholder="Admin" ng-value="pln.admin|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
+                    <span class="input-label">Total </span>
+                    <input readonly="readonly" type="text" placeholder="Total" ng-value="pln.total|currency:'Rp. ':0">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq && !pay">
+                    <span class="input-label">Pin </span>
+                    <input type="password" placeholder="Pin" ng-model="pln.pin">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="!inq && pay">
+                    <span class="input-label">Serial No</span>
+                    <input type="text" placeholder="Serial No" ng-model="pln.sn">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="!inq && pay">
+                    <span class="input-label">Status</span>
+                    <input type="text" placeholder="Status" ng-model="pln.statusTrx">
                 </label>
                 <br>
-                <div>Syarat dan ketentuan berlaku </div>
-                <br>
-                <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1">
-                    <i class="fa fa-money"></i> Bayar
-                </button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="inq && !pay" ng-click="bayar()"> <i class="fa fa-money"></i> Bayar</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="!inq && !pay" ng-click="beli()"> <i class="fa fa-money"></i> Check Data</button>
             </div>
         </div>
     </ion-content>

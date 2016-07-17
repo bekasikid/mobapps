@@ -1376,14 +1376,13 @@ app.run(function ($ionicPlatform) {
         //
 
         buyLists.trx = function (pinTrx, phoneResponse) {
-            // var def = $q.defer();
+            var def = $q.defer();
             var loadingIndicator = $ionicLoading.show({
                 template: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
             });
-            var timer = $timeout(function () {
-                $ionicLoading.hide();
-                $state.go('app.laporan');
-            }, 18000);
+            // var timer = $timeout(function () {
+            //     $ionicLoading.hide();
+            // }, 18000);
 
             var timestamp = date_php("YmdHis");
             var pass = CryptoJS.SHA1((response.username_trx + pinTrx + timestamp)).toString();
@@ -1395,8 +1394,14 @@ app.run(function ($ionicPlatform) {
                 "terminal": "terminal-mobapps-1",
                 "timestamp": timestamp,
                 "sign": pass,
-                "prodName": $rootScope.prepaid.opCode + $rootScope.prepaid.nominal
+                "prodName": $rootScope.prepaid.opCode + $rootScope.prepaid.nominal,
+                "data" : {}
             };
+            if(phoneResponse!=""){
+                data.data = {
+                    "custPhone" : phoneResponse
+                }
+            }
             var link_beli = uri + "routers/router";
             $http({
                 method: 'POST',
@@ -1405,47 +1410,24 @@ app.run(function ($ionicPlatform) {
                 headers: {'Content-Type': 'application/json'}
             }).then(function (res) {
                 $ionicLoading.hide();
-                if (res.status == 200) {
-                    // console.log(res.data);
-                    if (parseInt(res.data.noerr) == 302) {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Kode Pin salah',
-                            template: 'Kode Pin salah, harap ulangi!'
-                        });
-                    } else if (res.data.status != "FAILED") {
+                // $timeout.cancel(timer);
+                if(res.status==200) {
+                    if (res.data.status != "FAILED") {
                         $rootScope.balance = res.data.balance;
                         $localstorage.set("nextgen.balance", $rootScope.balance);
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Beli Pulsa Berhasil',
-                            template: 'Selamat anda telah membeli pulsa'
-                        });
-                    } else {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Beli Pulsa Gagal',
-                            template: res.data.message
-                        });
+                        // console.log(res.data.balance);
                     }
-                } else {
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Beli Pulsa Gagal',
-                        template: res.data.status
-                    });
                 }
-                alertPopup.then(function () {
-                    $timeout.cancel(timer);
-                    $state.go('app.laporan');
-                    $rootScope.prepaid = {
-                        notelp: "",
-                        nominal: "",
-                        pin: ""
-                    };
-                });
+                def.resolve(res);
+            },function(res){
+                $ionicLoading.hide();
+                def.resolve(res);
             });
 
             // $http.get(baseurl+"/api/payment/getPayment").success(function(data){
             //     def.resolve(data);
             // });
-            // return def.promise;
+            return def.promise;
         };
         return buyLists;
     })
@@ -1467,9 +1449,9 @@ app.run(function ($ionicPlatform) {
             var loadingIndicator = $ionicLoading.show({
                 template: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
             });
-            var timer = $timeout(function () {
-                $ionicLoading.hide();
-            }, 18000);
+            // var timer = $timeout(function () {
+            //     $ionicLoading.hide();
+            // }, 18000);
 
             var timestamp = date_php("YmdHis");
             var pass = CryptoJS.SHA1((response.username_trx + password + timestamp)).toString();
@@ -1491,8 +1473,54 @@ app.run(function ($ionicPlatform) {
                 headers: {'Content-Type': 'application/json'}
             }).then(function (res) {
                 $ionicLoading.hide();
-                $timeout.cancel(timer);
-                def.resolve(data);
+                def.resolve(res);
+            },function(res){
+                $ionicLoading.hide();
+            });
+            return def.promise;
+        };
+
+        paymentLists.pay = function (pin,resInq) {
+            var def = $q.defer();
+            var loadingIndicator = $ionicLoading.show({
+                template: '<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>'
+            });
+            // var timer = $timeout(function () {
+            //     $ionicLoading.hide();
+            // }, 18000);
+
+            var timestamp = date_php("YmdHis");
+            var pass = CryptoJS.SHA1((response.username_trx + pin + timestamp)).toString();
+            var data = {
+                "log_id" : resInq.log_id,
+                "userid": response.username_trx,
+                "reffid": resInq.reffid,
+                "target": resInq.target,
+                "amount": resInq.amount,
+                "terminal": "terminal-mobapps-1",
+                "timestamp": timestamp,
+                "sign": pass,
+                "prodName": resInq.prodName
+            };
+            var link_bayar = uri + "routers/payment";
+            $http({
+                method: 'POST',
+                url: link_bayar,
+                data: data,
+                headers: {'Content-Type': 'application/json'}
+            }).then(function (res) {
+                $ionicLoading.hide();
+                // $timeout.cancel(timer);
+                if(res.status==200) {
+                    if (res.data.status != "FAILED") {
+                        $rootScope.balance = res.data.balance;
+                        $localstorage.set("nextgen.balance", $rootScope.balance);
+                    }
+                }
+                def.resolve(res);
+            },function(res){
+                $ionicLoading.hide();
+                def.resolve(res);
             });
             return def.promise;
         };
@@ -1522,7 +1550,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'menuContent': {
                     templateUrl: 'templates/login.html',
-                    controller: 'ListsCtrl'
+                    controller: 'LoginCtrl'
                 }
             }
         })
@@ -1531,7 +1559,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'menuContent': {
                     templateUrl: 'templates/register.html',
-                    controller: 'ListsCtrl'
+                    controller: 'LoginCtrl'
                 }
             }
         })
@@ -1656,7 +1684,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'menuContent': {
                     templateUrl: 'templates/pln.html',
-                    controller: 'ExtensionsCtrl'
+                    controller: 'plnCtrl'
                 }
             }
         })
@@ -1734,7 +1762,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'menuContent': {
                     templateUrl: 'templates/token.html',
-                    controller: 'ExtensionsCtrl'
+                    controller: 'tokenCtrl'
                 }
             }
         })

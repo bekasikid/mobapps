@@ -1,32 +1,69 @@
 <ion-view view-title="Pembelian Token">
-<ion-content>
-<div class="im-wrapper">
-  <div class="list">
-    <br><br>
-    <label class="item item-input item-floating-label">
-      <span class="input-label">Nomor Meter </span>
-      <input type="text" placeholder="Contoh 8981289129092">
-    </label>
-    <br>
-    <label class="item item-input item-select">
-        <div class="input-label">
-            Nominal
+    <ion-content>
+        <div class="im-wrapper">
+            <div class="text-center">
+                Token PLN
+            </div>
+            <div class="text-center" ng-if="inq && !pay">
+                Periksa Kembali Sebelum Memproses.
+            </div>
+            <div class="list">
+                <br><br>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Nomor Meter / No Pelanggan</span>
+                    <input type="text" placeholder="Contoh 8981289129092">
+                </label>
+                <br>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Nominal
+                    </div>
+                    <select name="nominal">
+                        <option value="20" selected>20.000</option>
+                        <option value="50">50.000</option>
+                        <option value="100">100.000</option>
+                        <option value="200">200.000</option>
+                        <option value="500">500.000</option>
+                        <option value="1000">1.000.000</option>
+                    </select>
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq && !pay">
+                    <span class="input-label">No HP </span>
+                    <input type="tel" placeholder="No HP Pelanggan" ng-model="$root.prepaid.custPhone">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="inq && !pay">
+                    <span class="input-label">Pin </span>
+                    <input type="password" placeholder="Pin" ng-model="$root.prepaid.pin">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="$root.prepaid.noerr==100">
+                    <span class="input-label">No Token</span>
+                    <input type="text" placeholder="No Token" readonly="readonly" ng-model="$root.prepaid.sn">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="$root.prepaid.noerr==100">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="Nama" readonly="readonly" ng-model="$root.prepaid.nama">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="$root.prepaid.noerr==100">
+                    <span class="input-label">Tarif / Daya</span>
+                    <input type="text" placeholder="Tarif Daya" readonly="readonly" ng-model="$root.prepaid.tarifdaya">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="$root.prepaid.noerr==100">
+                    <span class="input-label">KWH</span>
+                    <input type="text" placeholder="KWH" readonly="readonly" ng-model="$root.prepaid.kwh">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="!inq && pay">
+                    <span class="input-label">Status</span>
+                    <input type="text" placeholder="Status" ng-model="$root.prepaid.statusTrx">
+                </label>
+                <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1"
+                        ng-if="!inq && !pay" ng-click="konfirmasi()" ng-disabled="!valid">
+                    <i class="icon ion-android-cart"></i> Konfirmasi
+                </button>
+                <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1"
+                        ng-if="inq && !pay" ng-click="beli()" ng-disabled="!valid">
+                    <i class="icon ion-android-cart"></i> Beli
+                </button>
+            </div>
         </div>
-        <select name="nominal">
-            <option value="0" selected>20.000</option>
-            <option value="1">50.000</option>
-            <option value="2">100.000</option>
-            <option value="3">150.000</option>
-            <option value="4">200.000</option>
-        </select>
-    </label>
-    <br><br>
-    <div>Syarat dan ketentuan berlaku </div>
-    <br>
-    <button class="button button-block button-assertive ink" data-ink-color="#9DEAFF" data-ink-opacity="1">
-      <i class="icon ion-android-cart"></i> Beli
-    </button>
-  </div>
-</div>
-</ion-content>
+    </ion-content>
 </ion-view>

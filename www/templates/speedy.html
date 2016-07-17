@@ -1,4 +1,4 @@
-<ion-view view-title="Tagihan Speedy">
+<ion-view view-title="Tagihan Speedy" cache-view="false">
     <ion-content>
         <div class="im-wrapper">
         	<div class="text-center">
@@ -6,41 +6,49 @@
         	</div>
             <div class="list">
                 <br>
-                <label class="item item-input item-floating-label">
+                <label class="item item-input item-stacked-label">
                     <span class="input-label">No ID Pelanggan</span>
-                    <input type="tel" readonly="readonly" placeholder="No ID Pelanggan" ng-model="telkom.target">
+                    <input type="tel" placeholder="No ID Pelanggan" ng-model="telkom.target">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq">
                     <span class="input-label">Nama </span>
                     <input type="text" readonly="readonly" placeholder="Nama" ng-model="telkom.nama">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
                     <span class="input-label">Periode </span>
                     <input type="text" readonly="readonly" placeholder="Periode" ng-model="telkom.periode">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
                     <span class="input-label">DIVRE </span>
                     <input type="text" readonly="readonly" placeholder="DIVRE" ng-model="telkom.divre">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
                     <span class="input-label">Tagihan </span>
-                    <input readonly="readonly" type="text" placeholder="Tagihan" ng-model="telkom.tagihan|currency:'Rp. ':0">
+                    <input readonly="readonly" type="text" placeholder="Tagihan" ng-value="telkom.tagihan|currency:'Rp. ':0">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
                     <span class="input-label">Admin </span>
-                    <input readonly="readonly" type="text" placeholder="Admin" ng-model="telkom.admin|currency:'Rp. ':0">
+                    <input readonly="readonly" type="text" placeholder="Admin" ng-value="telkom.admin|currency:'Rp. ':0">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq || pay">
                     <span class="input-label">Total </span>
-                    <input readonly="readonly" type="text" placeholder="Total" ng-model="telkom.total|currency:'Rp. ':0">
+                    <input readonly="readonly" type="text" placeholder="Total" ng-value="telkom.total|currency:'Rp. ':0">
                 </label>
-                <label class="item item-input item-floating-label" ng-if="inq">
+                <label class="item item-input item-stacked-label" ng-if="inq && !pay">
                     <span class="input-label">Pin </span>
-                    <input type="text" placeholder="Total" ng-model="telkom.pin">
+                    <input type="password" placeholder="Pin" ng-model="telkom.pin">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="$scope.telkom.noerr==100">
+                    <span class="input-label">Serial No</span>
+                    <input type="text" placeholder="Serial No" ng-model="telkom.sn">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="!inq && pay">
+                    <span class="input-label">Status</span>
+                    <input type="text" placeholder="Status" ng-model="telkom.statusTrx">
                 </label>
                 <br>
-                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="!inq" ng-click="beli()"> <i class="fa fa-money"></i> Check Data</button>
-                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="inq" ng-click="bayar()"> <i class="fa fa-money"></i> Bayar</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="inq && !pay" ng-click="bayar()"> <i class="fa fa-money"></i> Bayar</button>
+                <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-if="!inq && !pay" ng-click="beli()"> <i class="fa fa-money"></i> Check Data</button>
             </div>
         </div>
     </ion-content>

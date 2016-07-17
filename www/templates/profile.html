@@ -8,7 +8,7 @@
                 <h4 style="color:dark">Saldo : {{ profile.balance | currency : "Rp. ":0 }}</h4>
             </div>
         </div>
-        <h4 class="content padding double-padding-x">History</h4>
+        <h4 class="content padding double-padding-x">Profile</h4>
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Nama </span>
@@ -34,6 +34,7 @@
                 <span class="input-label">Pin Konfirmasi</span>
                 <input type="password" placeholder="Pin Konfirmasi" ng-model="profile.pin.confirmPin">
             </label>
+            <button class="button col-md-12 button-block button-assertive waves-effect waves-button waves-light" ng-click="rubah()"> Bayar</button>
         </div>
     </ion-content>
 </ion-view>

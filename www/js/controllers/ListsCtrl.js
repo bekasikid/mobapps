@@ -1,4 +1,8 @@
-﻿app.controller('ListsCtrl', function ($scope, $stateParams, ionicMaterialMotion, $http, $state, $ionicPopup, $ionicHistory, $ionicLoading,$rootScope) {
+﻿app.controller('LoginCtrl', function ($scope, $stateParams, ionicMaterialMotion, $http, $state, $ionicPopup, $ionicHistory, $ionicLoading,$rootScope,$localstorage) {
+
+    $localstorage.remove("nextgen.username");
+    $localstorage.remove("nextgen.password");
+    $localstorage.remove("nextgen.response");
 
     var reset = function () {
         var inClass = document.querySelectorAll('.in');
@@ -69,9 +73,9 @@
             if (res.status = 200) {
                 if (res.data.noerr == 0) {
                     $scope.fullname = res.data.fullname;
-                    window.localStorage.setItem("nextgen.username", res.data.fullname);
-                    window.localStorage.setItem("nextgen.password", res.password);
-                    window.localStorage.setItem("nextgen.response", JSON.stringify(res.data));
+                    $localstorage.set("nextgen.username", res.data.fullname);
+                    $localstorage.set("nextgen.password", res.password);
+                    $localstorage.set("nextgen.response", JSON.stringify(res.data));
                     ky = CryptoJS.enc.Utf8.parse(key);
                     var iv = CryptoJS.enc.Base64.parse(res.data.iv); //nilai iv ada di response
                     var plaintext = CryptoJS.AES.decrypt(res.data.password_trx, ky, {
