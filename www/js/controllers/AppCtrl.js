@@ -1,5 +1,5 @@
 ﻿// app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory, ngFB) {
-app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory,$rootScope) {
+app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPopup, $timeout, $location, $ionicHistory,$localstorage) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -92,11 +92,12 @@ app.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $ionicPop
     };
 
     $scope.logout = function() {
-        window.localStorage.removeItem("nextgen.username");
-        window.localStorage.removeItem("nextgen.balance");
-        window.localStorage.removeItem("nextgen.response");
-        window.localStorage.removeItem("nextgen.password");
-        window.location = "#/app/information";
+        $localstorage.remove("nextgen.username");
+        $localstorage.remove("nextgen.balance");
+        $localstorage.remove("nextgen.response");
+        $localstorage.remove("nextgen.password");
+        $localstorage.remove("nextgen.pricing");
+        window.location = "#/app/login";
         $ionicHistory.nextViewOptions({
             disableBack: true
         });

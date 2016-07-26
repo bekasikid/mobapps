@@ -11,21 +11,25 @@
                 <br><br>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Nomor Meter / No Pelanggan</span>
-                    <input type="text" placeholder="Contoh 8981289129092">
+                    <input type="text" placeholder="Contoh 8981289129092" ng-model="$root.prepaid.notelp">
                 </label>
                 <br>
                 <label class="item item-input item-select">
                     <div class="input-label">
                         Nominal
                     </div>
-                    <select name="nominal">
-                        <option value="20" selected>20.000</option>
-                        <option value="50">50.000</option>
-                        <option value="100">100.000</option>
-                        <option value="200">200.000</option>
-                        <option value="500">500.000</option>
-                        <option value="1000">1.000.000</option>
+                    <select name="nominal" ng-model="$root.prepaid.prodName" ng-change="rubahHarga()">
+                        <option value="PLN20" selected>20.000</option>
+                        <option value="PLN50">50.000</option>
+                        <option value="PLN100">100.000</option>
+                        <option value="PLN200">200.000</option>
+                        <option value="PLN500">500.000</option>
+                        <option value="PLN1000">1.000.000</option>
                     </select>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Harga </span>
+                    <input type="text" placeholder="Harga" ng-value="$root.prepaid.price|currency:'Rp. ':0" >
                 </label>
                 <label class="item item-input item-stacked-label" ng-if="inq && !pay">
                     <span class="input-label">No HP </span>

@@ -18,8 +18,7 @@
                     <img src="img/xl.png" ng-if="$root.prepaid.opCode =='xl'"/>
                     <img src="img/bolt.jpg" ng-if="$root.prepaid.opCode =='bolt'"/>
                     <span class="input-label">Nomor Telepon</span>
-                    <input type="tel" placeholder="Contoh 081234567890" ng-model="$root.prepaid.notelp"
-                           ng-change="validateOperator()">
+                    <input type="tel" placeholder="Contoh 081234567890" ng-model="$root.prepaid.notelp" ng-change="validateOperator()">
                 </label>
                 <br>
                 <label class="item item-input item-select hidden">
@@ -42,12 +41,16 @@
                     </div>
                     <select ng-model="$root.prepaid.nominal" ng-change="validateOperator()">
                         <option value="5" selected>5.000</option>
-                        <option value="10" selected>10.000</option>
+                        <option value="10">10.000</option>
                         <option value="20">20.000</option>
                         <option value="25">25.000</option>
                         <option value="50">50.000</option>
                         <option value="100">100.000</option>
                     </select>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Harga </span>
+                    <input type="text" placeholder="Harga" ng-value="$root.prepaid.price|currency:'Rp. ':0" >
                 </label>
                 <label class="item item-input item-stacked-label" ng-if="inq && !pay">
                     <span class="input-label">Pin </span>

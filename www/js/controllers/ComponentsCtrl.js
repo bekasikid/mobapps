@@ -1,4 +1,4 @@
-﻿app.controller('PulsaCtrl', function ($scope, $rootScope, $state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation, buyFactory) {
+﻿app.controller('PulsaCtrl', function ($scope, $rootScope, $state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation, buyFactory,$localstorage) {
     var axisObj = ["0831", "0832", "0836", "0837", "0838", "0835", "0839"];
     var sfObj = ["0889", "0886", "0887", "0888", "0881", "0882", "0883"];
     var isatObj = ["0814", "0815", "0816", "0855", "0856", "0857", "0858"];
@@ -20,7 +20,9 @@
         sn: "",
         statusTrx: "",
         noerr : 0,
-        custPhone : ""
+        custPhone : "",
+        price : 0,
+        prodName : ""
     };
     $scope.getLogo = function () {
         var logo = "../img/" + $rootScope.prepaid.opLogo;
@@ -54,6 +56,15 @@
     };
 
     var opCode = "";
+    var pricing = $localstorage.getObject("nextgen.pricing");
+    var cariHarga = function(prod){
+        for(i=0;i<pricing.length;i++){
+            if(pricing[i].name.toLowerCase()==prod.toLowerCase()){
+                return pricing[i];
+            }
+        }
+        return false;
+    };
 
     $scope.validateOperator = function () {
         $scope.inq = false;
@@ -62,7 +73,6 @@
             return false;
         }
         var prefixNo = $rootScope.prepaid.notelp.substring(0, 4);
-        // console.log(prefixNo);
         if (axisObj.indexOf(prefixNo) != -1) {
             opCode = "axis";
             $scope.valid = true;
@@ -103,11 +113,17 @@
                 opCode = "bolt";
                 $scope.valid = true;
                 $rootScope.prepaid.opLogo = "bolt.jpg";
+            }else{
+                opCode = "";
+                $scope.valid = false;
             }
         }
+        if((opCode != "") && ((opCode+$rootScope.prepaid.nominal)!=$rootScope.prepaid.prodName)){
+            var harga = cariHarga(opCode+$rootScope.prepaid.nominal);
+            $scope.prepaid.price = harga.price;
+        }
         $rootScope.prepaid.opCode = opCode;
-        console.log($rootScope.prepaid.opLogo);
-        // console.log(opCode);
+        $rootScope.prepaid.prodName = opCode+$rootScope.prepaid.nominal;
     };
 
     $scope.inq = false;
@@ -137,8 +153,9 @@
         });
     };
 })
-    .controller('tokenCtrl', function ($scope, $rootScope, $state, $stateParams, ionicMaterialInk, $http, $ionicPopup, $cordovaGeolocation, buyFactory) {
+    .controller('tokenCtrl', function ($scope, $rootScope, $state, $stateParams, $http, $ionicPopup, buyFactory,$localstorage) {
         $rootScope.prepaid = {
+            notelp: "",
             nominal: 0,
             nama: "",
             tarifdaya: "",
@@ -147,13 +164,25 @@
             sn: "",
             statusTrx: "",
             noerr : 0,
-            custPhone : ""
+            custPhone : "",
+            price : 0,
+            prodName : ""
         };
 
         $scope.inq = false;
         $scope.pay = false;
         $scope.konfirmasi = function () {
             $scope.inq = true;
+        };
+        var pricing = $localstorage.getObject("nextgen.pricing");
+        $scope.rubahHarga = function(){
+            $rootScope.prepaid.price = 0;
+            for(i=0;i<pricing.length;i++){
+                if(pricing[i].name.toLowerCase()==$rootScope.prepaid.prodName.toLowerCase()){
+                    $rootScope.prepaid.price = pricing[i].price;
+                    return pricing[i];
+                }
+            }
         };
         $scope.beli = function () {
             buyFactory.trx($rootScope.prepaid.pin, $rootScope.prepaid.custPhone).then(function (res) {

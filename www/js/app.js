@@ -1363,7 +1363,7 @@ app.run(function ($ionicPlatform) {
             }
         }
     }])
-    .factory("buyFactory", function ($http, $q, $window, $ionicLoading, $ionicPopup, $state, $localstorage, $rootScope, $timeout) {
+    .factory("buyFactory", function ($http, $q, $window, $ionicLoading, $ionicPopup, $state, $localstorage, $rootScope, $timeout,$ionicHistory) {
         var items = [];
         var buyLists = {};
 
@@ -1415,9 +1415,16 @@ app.run(function ($ionicPlatform) {
                     if (res.data.status != "FAILED") {
                         $rootScope.balance = res.data.balance;
                         $localstorage.set("nextgen.balance", $rootScope.balance);
-                        // console.log(res.data.balance);
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Transaksi Berhasil',
+                            template: "Transaksi "+data.prodName+" untuk "+data.target+" berhasil.<br /> Saldo anda " + number_format((res.data.balance+res.data.price),0,",",".") +" - " + number_format((res.data.price),0,",",".")+" = " + number_format((res.data.balance),0,",",".")
+                        });
                     }
                 }
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 def.resolve(res);
             },function(res){
                 $ionicLoading.hide();
@@ -1431,7 +1438,7 @@ app.run(function ($ionicPlatform) {
         };
         return buyLists;
     })
-    .factory("paymentFactory", function ($http, $q, $window, $ionicLoading, $ionicPopup, $state, $localstorage, $rootScope, $timeout) {
+    .factory("paymentFactory", function ($http, $q, $window, $ionicLoading, $ionicPopup, $state, $localstorage, $rootScope, $ionicHistory) {
         var items = [];
         var paymentLists = {};
 
@@ -1517,6 +1524,9 @@ app.run(function ($ionicPlatform) {
                         $localstorage.set("nextgen.balance", $rootScope.balance);
                     }
                 }
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 def.resolve(res);
             },function(res){
                 $ionicLoading.hide();
@@ -1648,6 +1658,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 'menuContent': {
                     templateUrl: 'templates/laporan.html',
                     controller: 'LaporanCtrl'
+                }
+            }
+        })
+
+        .state('app.mutasi', {
+            url: '/mutasi',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/mutasi.html',
+                    controller: 'MutasiCtrl'
                 }
             }
         })

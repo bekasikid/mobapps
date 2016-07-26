@@ -1,0 +1,20 @@
+﻿<ion-view view-title="Laporan">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <div class="item card-item" ng-repeat="item in items">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item">
+                    <a class="item item-icon-left" href="#">
+                        <h2>{{item.tgl}} - {{item.desc}}</h2>
+                        <p>
+                          {{item.saldo | currency : "Rp. " : 0}} | {{item.amount | currency : "Rp. " : 0}} | {{item.saldo_akhir | currency : "Rp. " : 0}}
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="3%" ng-if="adaData">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

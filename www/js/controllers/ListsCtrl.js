@@ -88,11 +88,28 @@
                     var link_balance = uri + 'routers/balance/userid/' + res.data.username_trx + '/sign/' + pass + '/timestamp/' + timestamp;
                     $http.get(link_balance).then(function (row_b) {
                         $rootScope.balance = row_b.data.balance;
-                        window.localStorage.setItem("nextgen.balance", $rootScope.balance);
+                        $localstorage.set("nextgen.balance", $rootScope.balance);
                     });
                     $state.go("app.mainmenu");
                     $ionicHistory.nextViewOptions({
                         disableBack: true
+                    });
+                    //get pricing
+                    // $response = Requests::get(api_url("api/pricing_product/byprice/id_price/" . $this->session->userdata('pricingId')),array('Content-type'=>' application/json'));
+                    // $rows = json_decode($response->body,true);
+                    var pricingUrl = uri+"pricing_product/byprice/id_price/"+res.data.pricingId;
+                    $http.get(pricingUrl).then(function(res){
+                        var pricing = [];
+                        for(i=0;i<res.data.length;i++){
+                            pricing.push({
+                                id : parseInt(res.data[i].id),
+                                name : res.data[i].name,
+                                price : res.data[i].price
+                            });
+                        }
+                        console.log(pricing);
+                        $rootScope.pricing = res.data
+                        $localstorage.setObject("nextgen.pricing",pricing);
                     });
                 } else if(res.data.noerr == 2) {
                     var alertPopup = $ionicPopup.alert({
